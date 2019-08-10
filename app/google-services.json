@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "575524833933",
+    "firebase_url": "https://newshunter-ca457.firebaseio.com",
+    "project_id": "newshunter-ca457",
+    "storage_bucket": "newshunter-ca457.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575524833933:android:a9f687254570c3c8",
+        "android_client_info": {
+          "package_name": "com.example.newshunter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575524833933-9qv5cea5r9r8ctfu3p3jkjcjdqerepfd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.newshunter",
+            "certificate_hash": "1ebd1b1ebc60dd0193d75ff904e92ee49592e2e5"
+          }
+        },
+        {
+          "client_id": "575524833933-o61k2tf2g7q54lu7n6ohe8flrspaaopr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0tdJvMhSlrdR8CZ98yfOXVAf6Yhh1TY0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575524833933-o61k2tf2g7q54lu7n6ohe8flrspaaopr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">News Hunter</string>
+    <string name="image_description">image will be updated with content from the news feed</string>
+    <string name="app_heading">Latest News Available</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_setting">setting</string>
+    <string name="search_hint">Enter News Tags</string>
+    <string name="btn_txt">Load Full View</string>
+    <string name="business_news">Business News</string>
+    <string name="wall_street_news">Wall Street News</string>
+    <string name="tech_news">Tech News</string>
+    <string name="home_news">Home Page</string>
+    <string name="refresh">Refresh</string>
+    <string name="log_out">Sign Out</string>
+    <string name="enter_password">Enter A Password</string>
+    <string name="enter_email">Enter Email Here</string>
+    <string name="sign_up">sign up</string>
+    <string name="login">login</string>
+    <string name="take_notes">Take Notes</string>
+    <string name="show_notes">Saved Notes</string>
+    <string name="add_note">Add A Note</string>
+</resources>
