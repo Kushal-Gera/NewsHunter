@@ -5,24 +5,30 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.ColorSpace;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
-
     private static final String TAG = "My_adapter";
+
     private Context myContext;
     private User data;
     private Boolean flag = false;
@@ -62,6 +68,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
             Glide.with(myContext).load(model.getUrlToImage()).placeholder(R.drawable.placeholder).centerCrop().into(holder.img);
 
 
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -83,7 +90,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
         return data.getArticles().length<1 ? 1 : data.getArticles().length;
     }
 
-    public String getDate(String oldDate){
+    private String getDate(String oldDate){
         String newDate;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", new Locale("india"));
         try {

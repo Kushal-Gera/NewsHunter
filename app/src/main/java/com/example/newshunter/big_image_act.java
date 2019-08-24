@@ -22,13 +22,17 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.r0adkll.slidr.Slidr;
 
 public class big_image_act extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_big_image_act);
+
+        Slidr.attach(this);
 
         getIncomingIntent();
     }

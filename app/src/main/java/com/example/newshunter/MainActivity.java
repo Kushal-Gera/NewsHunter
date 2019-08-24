@@ -68,9 +68,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
-
         Toast.makeText(this, "Hello " + firebaseAuth.getCurrentUser().getEmail() , Toast.LENGTH_SHORT).show();
-
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -101,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.closeDrawer(GravityCompat.START);
                 nav_tv.setText(getString(R.string.wall_street_news));
                 atHome = false;
-
             }
         });
 
@@ -301,5 +298,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
     }
+
+
 }
 

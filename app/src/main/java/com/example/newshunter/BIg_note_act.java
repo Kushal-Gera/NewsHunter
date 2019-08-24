@@ -75,7 +75,8 @@ public class BIg_note_act extends AppCompatActivity {
 
                     Toast.makeText(BIg_note_act.this, "Updated", Toast.LENGTH_SHORT).show();
                     finish();
-                }else {
+                }
+                else {
                     pd.setMessage("Please Fill ALL Required Fields");
                     pd.show();
                 }

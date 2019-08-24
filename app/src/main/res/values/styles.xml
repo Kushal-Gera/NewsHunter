@@ -9,4 +9,10 @@
 
     </style>
 
+    <style name="AppTheme.mySlideTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+    </style>
+
 </resources>
