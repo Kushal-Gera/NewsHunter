@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 class My_viewHolder extends RecyclerView.ViewHolder {
 
-     ImageView img;
+     ImageView img, saveStar, saveColorStar;
      LinearLayout main_ll;
      TextView title, description, source, author, date;
      View dateView;
@@ -27,6 +27,8 @@ class My_viewHolder extends RecyclerView.ViewHolder {
          source = itemView.findViewById(R.id.source);
          author = itemView.findViewById(R.id.author);
          dateView = itemView.findViewById(R.id.dateView);
+         saveStar = itemView.findViewById(R.id.saveStar);
+         saveColorStar = itemView.findViewById(R.id.saveColorStar);
 
 
      }

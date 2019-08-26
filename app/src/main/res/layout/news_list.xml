@@ -99,22 +99,55 @@
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:padding="4dp"
                 android:textSize="18sp"
                 tools:text="Something is being seen Something is beingin seen Something is being seen Something is being seen" />
 
-            <TextView
-                android:id="@+id/source"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:textColor="@color/colorBlack"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:text="Source" />
+                android:layout_marginStart="12dp">
+
+                <TextView
+                    android:id="@+id/source"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="Source" />
+
+                <ImageView
+                    android:id="@+id/saveColorStar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignEnd="@+id/source"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="15dp"
+                    android:contentDescription="@string/image_description"
+                    android:src="@drawable/star" />
+
+                <ImageView
+                    android:id="@+id/saveStar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignEnd="@+id/source"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="15dp"
+                    android:elevation="2dp"
+                    android:contentDescription="@string/image_description"
+                    android:src="@drawable/star_to_select" />
+
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"

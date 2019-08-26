@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,6 +48,8 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
             holder.description.setText("Please Search Something Else");
             holder.author.setVisibility(View.GONE);
             holder.dateView.setVisibility(View.GONE);
+            holder.saveStar.setVisibility(View.GONE);
+            holder.saveColorStar.setVisibility(View.GONE);
         }else {
             Article[] articles = data.getArticles();
             final Article model = articles[position];
@@ -57,6 +60,28 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
             holder.author.setText(model.getAuthor());
             holder.date.setText(getDate(model.getPublishedAt()));
             Glide.with(myContext).load(model.getUrlToImage()).placeholder(R.drawable.placeholder).centerCrop().into(holder.img);
+
+                //set On click listeners
+            holder.saveColorStar.setVisibility(View.GONE);
+            holder.saveStar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(v, "Bookmarked..", Snackbar.LENGTH_SHORT).show();
+//                    save the book-mark and send it to fireBase storage
+                    holder.saveColorStar.setVisibility(View.VISIBLE);
+                    holder.saveStar.setVisibility(View.GONE);
+                }
+            });
+
+            holder.saveColorStar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(v, "Un-marked !", Snackbar.LENGTH_SHORT).show();
+//                    Un-save the book-mark
+                    holder.saveStar.setVisibility(View.VISIBLE);
+                    holder.saveColorStar.setVisibility(View.GONE);
+                }
+            });
 
             holder.img.setOnClickListener(new View.OnClickListener() {
                 @Override
