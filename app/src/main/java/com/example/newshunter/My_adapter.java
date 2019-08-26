@@ -67,9 +67,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
             holder.date.setText(getDate(model.getPublishedAt()));
             Glide.with(myContext).load(model.getUrlToImage()).placeholder(R.drawable.placeholder).centerCrop().into(holder.img);
 
-
-
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            holder.img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(myContext, big_image_act.class);
