@@ -35,6 +35,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -233,6 +235,10 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.settings:
                 Toast.makeText(this, "Special Thanks to 'NewsApi.org' for providing FREE API USAGE", Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.bookmarks:
+
                 break;
 
             case R.id.logout:

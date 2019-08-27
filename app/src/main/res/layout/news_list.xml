@@ -127,7 +127,7 @@
                     tools:text="Source" />
 
                 <ImageView
-                    android:id="@+id/saveColorStar"
+                    android:id="@+id/UnSaveStar"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignEnd="@+id/source"

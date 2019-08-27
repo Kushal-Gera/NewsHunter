@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f0f0f0"
+    android:keepScreenOn="true"
     android:padding="4dp">
 
     <ScrollView
@@ -96,6 +97,5 @@
 
         </LinearLayout>
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

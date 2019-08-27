@@ -7,12 +7,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,6 +24,10 @@ import java.util.Locale;
 
 public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
     private static final String TAG = "My_adapter";
+    private static final String BOOK_MARK = "bookmarks";
+
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private DatabaseReference myRef;
 
     private Context myContext;
     private User data;
@@ -49,7 +57,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
             holder.author.setVisibility(View.GONE);
             holder.dateView.setVisibility(View.GONE);
             holder.saveStar.setVisibility(View.GONE);
-            holder.saveColorStar.setVisibility(View.GONE);
+            holder.UnSaveStar.setVisibility(View.GONE);
         }else {
             Article[] articles = data.getArticles();
             final Article model = articles[position];
@@ -62,24 +70,16 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
             Glide.with(myContext).load(model.getUrlToImage()).placeholder(R.drawable.placeholder).centerCrop().into(holder.img);
 
                 //set On click listeners
-            holder.saveColorStar.setVisibility(View.GONE);
+            holder.UnSaveStar.setVisibility(View.GONE);
             holder.saveStar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(v, "Bookmarked..", Snackbar.LENGTH_SHORT).show();
 //                    save the book-mark and send it to fireBase storage
-                    holder.saveColorStar.setVisibility(View.VISIBLE);
-                    holder.saveStar.setVisibility(View.GONE);
-                }
-            });
+                    bookMark(model.getUrl());
+                    Snackbar.make(v, "Bookmarked", Snackbar.LENGTH_SHORT).show();
 
-            holder.saveColorStar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(v, "Un-marked !", Snackbar.LENGTH_SHORT).show();
-//                    Un-save the book-mark
-                    holder.saveStar.setVisibility(View.VISIBLE);
-                    holder.saveColorStar.setVisibility(View.GONE);
+                    holder.UnSaveStar.setVisibility(View.VISIBLE);
+                    holder.saveStar.setVisibility(View.GONE);
                 }
             });
 
@@ -116,6 +116,16 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
             newDate = oldDate;
         }
         return newDate;
+    }
+
+    private void bookMark(String url) {
+
+        myRef = FirebaseDatabase.getInstance().getReference()
+                .child(BOOK_MARK).child(auth.getCurrentUser().getUid());
+
+        myRef.push().setValue(url);
+
+
     }
 
 }

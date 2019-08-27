@@ -69,7 +69,8 @@ public class SavedNotesAct extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull final Note_viewholder holder, int i, @NonNull final NoteItems noteItems) {
 
                 final String noteId = getRef(i).getKey();
-                if (noteId != null) {
+
+                if (noteId != null ) {
                     ref.child(noteId).addValueEventListener(new ValueEventListener() {
 
                         @Override

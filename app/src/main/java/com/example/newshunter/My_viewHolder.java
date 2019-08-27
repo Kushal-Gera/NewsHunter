@@ -3,7 +3,6 @@ package com.example.newshunter;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 class My_viewHolder extends RecyclerView.ViewHolder {
 
-     ImageView img, saveStar, saveColorStar;
+     ImageView img, saveStar, UnSaveStar;
      LinearLayout main_ll;
      TextView title, description, source, author, date;
      View dateView;
@@ -27,8 +26,9 @@ class My_viewHolder extends RecyclerView.ViewHolder {
          source = itemView.findViewById(R.id.source);
          author = itemView.findViewById(R.id.author);
          dateView = itemView.findViewById(R.id.dateView);
+
          saveStar = itemView.findViewById(R.id.saveStar);
-         saveColorStar = itemView.findViewById(R.id.saveColorStar);
+         UnSaveStar = itemView.findViewById(R.id.UnSaveStar);
 
 
      }
