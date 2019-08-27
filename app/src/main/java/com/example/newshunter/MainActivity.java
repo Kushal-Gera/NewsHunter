@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.bookmarks:
-
+                startActivity(new Intent(this, Bookmark.class));
                 break;
 
             case R.id.logout:
