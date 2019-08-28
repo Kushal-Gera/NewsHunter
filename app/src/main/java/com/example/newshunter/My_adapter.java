@@ -86,7 +86,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
                 }
             });
 
-            holder.img.setOnClickListener(new View.OnClickListener() {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(myContext, big_image_act.class);

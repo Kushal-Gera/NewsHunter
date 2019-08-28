@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -234,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.settings:
-                Toast.makeText(this, "Special Thanks to 'NewsApi.org' for providing FREE API USAGE", Toast.LENGTH_LONG).show();
+                startActivity(new Intent (this, SettingsAct.class));
                 break;
 
             case R.id.bookmarks:
