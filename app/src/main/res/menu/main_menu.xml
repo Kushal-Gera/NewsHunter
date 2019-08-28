@@ -16,12 +16,6 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/add"
-        android:icon="@drawable/add"
-        android:title="@string/add_note"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/settings"
         android:title="@string/menu_setting"
         app:showAsAction="never" />

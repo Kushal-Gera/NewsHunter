@@ -229,11 +229,6 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         switch (id){
-            case R.id.add:
-                startActivity(new Intent(MainActivity.this, NotesAct.class));
-                atHome = true;
-                break;
-
             case R.id.settings:
                 startActivity(new Intent (this, SettingsAct.class));
                 break;
