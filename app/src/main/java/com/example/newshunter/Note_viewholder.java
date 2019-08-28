@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 class Note_viewholder extends RecyclerView.ViewHolder {
 
-    TextView note_text;
-    TextView title;
+    TextView note_text, title;
 
     Note_viewholder(@NonNull View itemView) {
 
