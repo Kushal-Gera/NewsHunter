@@ -29,8 +29,8 @@ public class Bookmark extends AppCompatActivity {
     private static final String TAG = "Bookmark";
     private static final String BOOK_MARK = "bookmarks";
     private static final String LINK = "link";
+    private static final String TITLE = "title";
     private static final String BM_IMAGE = "bm_image";
-
 
     RecyclerView recyclerView;
     FirebaseAuth auth;
@@ -70,8 +70,9 @@ public class Bookmark extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     final String link_url = String.valueOf(dataSnapshot.child(LINK).getValue());
                                     final String image_url = String.valueOf(dataSnapshot.child(BM_IMAGE).getValue());
+                                    final String title = String.valueOf(dataSnapshot.child(TITLE).getValue());
 
-                                    holder.link.setText(link_url);
+                                    holder.title.setText(title);
                                     pd.dismiss();
                                     Glide.with(holder.bm_image.getContext()).load(image_url)
                                             .centerCrop().placeholder(R.drawable.placeholder).into(holder.bm_image);
@@ -85,6 +86,13 @@ public class Bookmark extends AppCompatActivity {
                                     });
 
                                     holder.bm_image.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link_url)));
+                                        }
+                                    });
+
+                                    holder.title.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
                                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link_url)));

@@ -26,6 +26,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
     private static final String TAG = "My_adapter";
     private static final String BOOK_MARK = "bookmarks";
     private static final String LINK = "link";
+    private static final String TITLE = "title";
     private static final String BM_IMAGE = "bm_image";
 
     private FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -77,7 +78,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
                 @Override
                 public void onClick(View v) {
 //                    save the book-mark and send it to fireBase storage
-                    bookMark(model.getUrl(), model.getUrlToImage());
+                    bookMark(model.getUrl(), model.getUrlToImage(), model.getTitle());
                     Snackbar.make(v, "Bookmarked", Snackbar.LENGTH_SHORT).show();
 
                     holder.UnSaveStar.setVisibility(View.VISIBLE);
@@ -120,14 +121,14 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
         return newDate;
     }
 
-    private void bookMark(String url, String imageUrl) {
+    private void bookMark(String url, String imageUrl, String title) {
 
         myRef = FirebaseDatabase.getInstance().getReference()
                 .child(BOOK_MARK).child(auth.getCurrentUser().getUid()).push();
 
         myRef.child(LINK).setValue(url);
         myRef.child(BM_IMAGE).setValue(imageUrl);
-
+        myRef.child(TITLE).setValue(title);
 
     }
 
