@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -55,7 +56,10 @@ public class SavedNotesAct extends AppCompatActivity {
         Snackbar.make(content , "Tap Any Note To Edit", Snackbar.LENGTH_LONG).show();
 
         note_recView = findViewById(R.id.note_recView);
-        note_recView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        note_recView.setLayoutManager(linearLayoutManager);
 
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null)

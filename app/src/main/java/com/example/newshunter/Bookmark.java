@@ -122,10 +122,12 @@ public class Bookmark extends AppCompatActivity {
                     }
                 };
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
         adapter.startListening();
         recyclerView.setAdapter(adapter);
-
 
         }
 
