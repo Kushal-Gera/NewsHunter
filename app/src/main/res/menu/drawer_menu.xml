@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_search_black_24dp"
+            android:title="@string/home_news"/>
+
+        <item
+            android:id="@+id/business"
+            android:icon="@drawable/bookmark"
+            android:title="@string/business_news" />
+
+        <item
+            android:id="@+id/wsj"
+            android:icon="@drawable/bookmark"
+            android:title="@string/wall_street_news" />
+
+        <item
+            android:id="@+id/tech"
+            android:icon="@drawable/bookmark"
+            android:title="@string/tech_news" />
+
+    </group>
+
+    <item android:title="@string/make_a_note">
+        <menu>
+            <item
+                android:icon="@drawable/bookmark"
+                android:id="@+id/notes"
+                android:title="@string/take_notes" />
+
+            <item
+                android:icon="@drawable/bookmark"
+                android:id="@+id/show_notes"
+                android:title="@string/show_notes" />
+
+        </menu>
+    </item>
+
+
+</menu>

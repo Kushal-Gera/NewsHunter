@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (firebaseAuth.getCurrentUser() == null){
-            finish();
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
         Toast.makeText(this, "Hello " + firebaseAuth.getCurrentUser().getEmail() , Toast.LENGTH_SHORT).show();
 
@@ -300,6 +300,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
     }
+
 
 
 }

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,11 +56,13 @@ public class SavedNotesAct extends AppCompatActivity {
         View content = findViewById(R.id.content);
         Snackbar.make(content , "Tap Any Note To Edit", Snackbar.LENGTH_LONG).show();
 
+        //To sort it upside down
         note_recView = findViewById(R.id.note_recView);
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         note_recView.setLayoutManager(linearLayoutManager);
+        //*****************************************************************************************
 
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null)
