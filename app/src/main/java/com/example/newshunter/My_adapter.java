@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Handler;
 
 public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
     private static final String TAG = "My_adapter";
@@ -98,7 +99,24 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
                     myContext.startActivity(intent);
                 }
             });
+
+            holder.share.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    shareURL(model.getUrl());
+                }
+            });
         }
+
+    }
+
+    private void shareURL(String url) {
+
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "shared via News Hunter");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, url);
+        myContext.startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
     }
 

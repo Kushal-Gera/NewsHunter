@@ -1,23 +1,19 @@
 package com.example.newshunter;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Handler;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,8 +32,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -67,11 +61,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (firebaseAuth.getCurrentUser() == null){
+        if (firebaseAuth.getCurrentUser() == null) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
-        Toast.makeText(this, "Hello " + firebaseAuth.getCurrentUser().getEmail() , Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Hello " + firebaseAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -147,24 +141,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void setUpToolBar(){
+    public void setUpToolBar() {
         drawerLayout = findViewById(R.id.drawerLayout);
         toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name );
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
     }
 
-    public String generateURL(String baseUrl, String searchCriteria){
+    public String generateURL(String baseUrl, String searchCriteria) {
         return Uri.parse(baseUrl).buildUpon()
                 .appendQueryParameter("q", searchCriteria)
                 .appendQueryParameter("apiKey", api)
                 .build().toString();
     }
 
-    private void loadData(String url){
+    private void loadData(String url) {
 
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
@@ -187,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
 //      even I don't how this coding is working, I just pasted it :)
         View view = this.getCurrentFocus();
-        if (view != null){
+        if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
@@ -214,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
@@ -228,9 +223,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.settings:
-                startActivity(new Intent (this, SettingsAct.class));
+                startActivity(new Intent(this, SettingsAct.class));
                 break;
 
             case R.id.bookmarks:
@@ -248,30 +243,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if (this.drawerLayout.isDrawerOpen(GravityCompat.START) )
+        if (this.drawerLayout.isDrawerOpen(GravityCompat.START))
             this.drawerLayout.closeDrawer(GravityCompat.START);
 
         else if (searchUsed) {
             loadData(homeURL);
             nav_tv.setText(getString(R.string.home_news));
             searchUsed = false;
-          }
-        else if (!atHome){
+        } else if (!atHome) {
             loadData(homeURL);
             nav_tv.setText(getString(R.string.home_news));
             atHome = true;
-        }
-        else if (time + 2500 > System.currentTimeMillis()){
+        } else if (time + 2500 > System.currentTimeMillis()) {
             super.onBackPressed();
-        }
-        else{
+        } else {
             Toast.makeText(this, "Press Back Again To Exit", Toast.LENGTH_SHORT).show();
             time = System.currentTimeMillis();
         }
 
     }
 
-    public void signOut(){
+    public void signOut() {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Do You Really Want To Sign Out ?")
@@ -300,7 +292,6 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
     }
-
 
 
 }

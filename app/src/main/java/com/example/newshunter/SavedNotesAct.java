@@ -37,7 +37,7 @@ public class SavedNotesAct extends AppCompatActivity {
     FirebaseRecyclerOptions<NoteItems> options;
     FirebaseRecyclerAdapter<NoteItems, Note_viewholder> adapter;
 
-//    this is done to prevent un-neccesary change and in file paths.
+//    this is done to prevent un-necessary change and in file paths.
     public static final String USERS = "users";
     public static final String NOTEID = "noteId";
     public static final String NOTE = "note";
@@ -53,7 +53,7 @@ public class SavedNotesAct extends AppCompatActivity {
         pd.setMessage("Loading, PLease Wait");
         pd.show();
 
-        View content = findViewById(R.id.content);
+        final View content = findViewById(R.id.content);
         Snackbar.make(content , "Tap Any Note To Edit", Snackbar.LENGTH_LONG).show();
 
         //To sort it upside down
@@ -67,6 +67,12 @@ public class SavedNotesAct extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null)
             ref = FirebaseDatabase.getInstance().getReference().child(USERS).child(auth.getCurrentUser().getUid() );
+
+        if (ref.getKey() == null){
+            pd.dismiss();
+            Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         options = new FirebaseRecyclerOptions.Builder<NoteItems>()
                         .setQuery(ref, NoteItems.class).build();
@@ -99,7 +105,6 @@ public class SavedNotesAct extends AppCompatActivity {
                                         intent.putExtra(TITLE, title);
                                         intent.putExtra(NOTE, note_text);
                                         startActivity(intent);
-
                                     }
                                 });
 
@@ -109,6 +114,7 @@ public class SavedNotesAct extends AppCompatActivity {
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                             Log.e(TAG, "onCancelled: dataBae Error received");
+                            pd.dismiss();
                         }
 
                     });
@@ -126,10 +132,21 @@ public class SavedNotesAct extends AppCompatActivity {
 
             }
 
+            @Override
+            public int getItemCount() {
+                int c = super.getItemCount();
+                if (c == 0){
+                    pd.dismiss();
+                    Snackbar.make(content, "Nothing to show", Snackbar.LENGTH_INDEFINITE).show();
+                }
+                return c;
+            }
         };
 
         adapter.startListening();
         note_recView.setAdapter(adapter);
+
+
 
 
     }

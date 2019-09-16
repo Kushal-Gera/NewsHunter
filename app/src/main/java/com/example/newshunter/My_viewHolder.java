@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 class My_viewHolder extends RecyclerView.ViewHolder {
 
-     ImageView img, saveStar, UnSaveStar;
+     ImageView img, saveStar, UnSaveStar, share;
      LinearLayout main_ll;
      TextView title, description, source, author, date;
      View dateView;
@@ -29,6 +29,8 @@ class My_viewHolder extends RecyclerView.ViewHolder {
 
          saveStar = itemView.findViewById(R.id.saveStar);
          UnSaveStar = itemView.findViewById(R.id.UnSaveStar);
+
+         share = itemView.findViewById(R.id.share);
 
 
      }
