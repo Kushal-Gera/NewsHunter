@@ -8,10 +8,31 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+<!--    theme for splash screen-->
+    <style name="AppTheme.Splash">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <item name="android:statusBarColor">@color/colorBlack</item>
+    </style>
+
+
+<!--    theme for transparent statusBar and background-->
+    <style name="AppTheme.transparent">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+
+<!--    theme for Slidr-->
     <style name="TransparentTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
         <item name="android:statusBarColor">@android:color/transparent</item>
 
         <item name="android:windowIsTranslucent">true</item>

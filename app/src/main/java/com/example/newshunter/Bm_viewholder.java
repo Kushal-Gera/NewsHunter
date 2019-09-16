@@ -8,18 +8,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Bk_viewholder extends RecyclerView.ViewHolder {
+public class Bm_viewholder extends RecyclerView.ViewHolder {
 
-    public ImageView cross, bm_image;
+    public ImageView cross, bm_image, share;
     public TextView title;
 
 
-    public Bk_viewholder(@NonNull View itemView) {
+    public Bm_viewholder(@NonNull View itemView) {
         super(itemView);
 
         title = itemView.findViewById(R.id.bm_title);
         cross = itemView.findViewById(R.id.cross);
         bm_image = itemView.findViewById(R.id.bm_image);
+        share = itemView.findViewById(R.id.share_link);
 
     }
 }

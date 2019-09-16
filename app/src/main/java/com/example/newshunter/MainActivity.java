@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,12 +35,15 @@ import com.android.volley.toolbox.Volley;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.r0adkll.slidr.Slidr;
+import com.r0adkll.slidr.model.SlidrInterface;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
 
     Toolbar toolbar;
     RecyclerView recyclerView;
+    ProgressBar progressBar;
 
     LinearLayout navBar;
     TextView nav_tv;
@@ -60,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SlidrInterface slidrInterface = Slidr.attach(this);
+        slidrInterface.lock();
+
+        progressBar = findViewById(R.id.progress_circular);
 
         if (firebaseAuth.getCurrentUser() == null) {
             startActivity(new Intent(this, LoginActivity.class));
@@ -126,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, NotesAct.class));
+                drawerLayout.closeDrawer(GravityCompat.START);
                 atHome = true;
             }
         });
@@ -135,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, SavedNotesAct.class));
+                drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
 
@@ -159,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadData(String url) {
-
+        progressBar.setVisibility(View.VISIBLE);
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -167,12 +178,14 @@ public class MainActivity extends AppCompatActivity {
                 Gson gson = builder.create();
                 User users = gson.fromJson(response, User.class);
                 recyclerView.setAdapter(new My_adapter(MainActivity.this, users));
+                progressBar.setVisibility(View.GONE);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(MainActivity.this, "    DATA OR INTERNET\nMAY NOT BE AVAILABLE", Toast.LENGTH_LONG).show();
                 atHome = true;
+                progressBar.setVisibility(View.GONE);
             }
         });
 

@@ -49,6 +49,8 @@ public class SavedNotesAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_notes);
 
+        Slidr.attach(this);
+
         pd = new ProgressDialog(this);
         pd.setMessage("Loading, PLease Wait");
         pd.show();
@@ -132,15 +134,6 @@ public class SavedNotesAct extends AppCompatActivity {
 
             }
 
-            @Override
-            public int getItemCount() {
-                int c = super.getItemCount();
-                if (c == 0){
-                    pd.dismiss();
-                    Snackbar.make(content, "Nothing to show", Snackbar.LENGTH_INDEFINITE).show();
-                }
-                return c;
-            }
         };
 
         adapter.startListening();

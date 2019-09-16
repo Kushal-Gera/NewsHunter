@@ -28,7 +28,7 @@
 
             <TextView
                 android:id="@+id/big_name"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
@@ -38,14 +38,34 @@
                 android:textStyle="bold"
                 tools:text="Something" />
 
-            <ImageView
-                android:id="@+id/big_img"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_marginTop="8dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                android:src="@drawable/placeholder" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/big_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_marginTop="8dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/placeholder"
+                    android:contentDescription="@string/image_description" />
+
+                <ImageView
+                    android:id="@+id/share2"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/image_description"
+                    android:elevation="2dp"
+                    android:src="@drawable/share" />
+
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/big_content"
@@ -91,9 +111,7 @@
                 android:id="@+id/webView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="4dp"></WebView>
+                android:layout_marginTop="16dp"/>
 
         </LinearLayout>
     </ScrollView>

@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.logging.Handler;
 
 public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
     private static final String TAG = "My_adapter";
@@ -90,7 +88,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(myContext, big_image_act.class);
+                    Intent intent = new Intent(myContext, Big_image_act.class);
                     intent.putExtra("image_url", model.getUrlToImage());
                     intent.putExtra("big_title", model.getTitle());
                     intent.putExtra("big_cont", model.getContent());
@@ -112,10 +110,9 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
 
     private void shareURL(String url) {
 
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "shared via News Hunter");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, url);
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, url);
         myContext.startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
     }

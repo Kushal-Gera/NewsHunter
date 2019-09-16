@@ -24,7 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.r0adkll.slidr.Slidr;
 
-public class big_image_act extends AppCompatActivity {
+public class Big_image_act extends AppCompatActivity {
 
 
     @Override
@@ -42,6 +42,7 @@ public class big_image_act extends AppCompatActivity {
         if ( getIntent().hasExtra("image_url") && getIntent().hasExtra("big_title") ){
 
             ImageView big_img = findViewById(R.id.big_img);
+            ImageView share = findViewById(R.id.share2);
             TextView big_name = findViewById(R.id.big_name);
             TextView big_cont = findViewById(R.id.big_content);
             final ProgressBar progressBar = findViewById(R.id.progressBar);
@@ -75,6 +76,7 @@ public class big_image_act extends AppCompatActivity {
                 }
             } );
 
+            //web view btn set up
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -84,6 +86,19 @@ public class big_image_act extends AppCompatActivity {
                     btn.setVisibility(View.GONE);
                 }
             });
+
+            //share btn set up
+            share.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(Intent.ACTION_SEND);
+                    i.setType("text/plain");
+                    i.putExtra(Intent.EXTRA_TEXT, link);
+                    startActivity(Intent.createChooser(i, "share via"));
+                }
+            });
+
+
 
         }
     }

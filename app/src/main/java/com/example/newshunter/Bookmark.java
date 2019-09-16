@@ -13,18 +13,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.r0adkll.slidr.Slidr;
 
 public class Bookmark extends AppCompatActivity {
     private static final String TAG = "Bookmark";
@@ -37,7 +36,7 @@ public class Bookmark extends AppCompatActivity {
     FirebaseAuth auth;
     DatabaseReference my_ref;
     FirebaseRecyclerOptions<BMarkItems> options;
-    FirebaseRecyclerAdapter<BMarkItems, Bk_viewholder> adapter;
+    FirebaseRecyclerAdapter<BMarkItems, Bm_viewholder> adapter;
 
     ProgressDialog pd;
 
@@ -45,6 +44,8 @@ public class Bookmark extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmark);
+
+        Slidr.attach(this);
 
         recyclerView = findViewById(R.id.bk_recView);
 
@@ -58,15 +59,14 @@ public class Bookmark extends AppCompatActivity {
         options = new FirebaseRecyclerOptions.Builder<BMarkItems>()
                 .setQuery(my_ref, BMarkItems.class).build();
 
-        adapter = new FirebaseRecyclerAdapter<BMarkItems, Bk_viewholder>(options) {
+        adapter = new FirebaseRecyclerAdapter<BMarkItems, Bm_viewholder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull final Bk_viewholder holder, int i, @NonNull final BMarkItems items) {
+                    protected void onBindViewHolder(@NonNull final Bm_viewholder holder, int i, @NonNull final BMarkItems items) {
 
                         final String node_id = getRef(i).getKey();
+                        if (node_id == null ) return;
 
-                        if (node_id != null ) {
-
-                            my_ref.child(node_id).addValueEventListener(new ValueEventListener() {
+                        my_ref.child(node_id).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     final String link_url = String.valueOf(dataSnapshot.child(LINK).getValue());
@@ -78,25 +78,27 @@ public class Bookmark extends AppCompatActivity {
                                     Glide.with(holder.bm_image.getContext()).load(image_url)
                                             .centerCrop().placeholder(R.drawable.placeholder).into(holder.bm_image);
 
+                                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link_url)));
+                                        }
+                                    });
+
                                     holder.cross.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
                                             my_ref.child(node_id).removeValue();
-
                                         }
                                     });
 
-                                    holder.bm_image.setOnClickListener(new View.OnClickListener() {
+                                    holder.share.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link_url)));
-                                        }
-                                    });
-
-                                    holder.title.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link_url)));
+                                            Intent i = new Intent(Intent.ACTION_SEND);
+                                            i.setType("text/plain");
+                                            i.putExtra(Intent.EXTRA_TEXT, link_url);
+                                            startActivity(Intent.createChooser(i, "share via"));
                                         }
                                     });
 
@@ -108,18 +110,13 @@ public class Bookmark extends AppCompatActivity {
                                     Log.e(TAG, "onCancelled: Error" );
                                 }
                             });
-
-
-                        }
-
-
                     }
 
                     @NonNull
                     @Override
-                    public Bk_viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    public Bm_viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bk_mark_list, parent, false);
-                        return new Bk_viewholder(view);
+                        return new Bm_viewholder(view);
                     }
 
 
