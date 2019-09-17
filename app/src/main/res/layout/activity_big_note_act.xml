@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:isScrollContainer="true"
-    android:background="#DDD"
+    android:background="#FFF"
     tools:context=".NotesAct">
 
     <LinearLayout
@@ -59,6 +59,10 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
         <EditText
             android:id="@+id/big_notes"
             android:layout_width="match_parent"
@@ -70,7 +74,10 @@
             android:focusedByDefault="false"
             android:hint="Enter Text Briefly (optional)"
             android:textSize="18sp"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            android:importantForAutofill="no" />
+
+        </androidx.core.widget.NestedScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
