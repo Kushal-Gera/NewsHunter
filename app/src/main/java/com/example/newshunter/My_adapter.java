@@ -77,7 +77,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
                 @Override
                 public void onClick(View v) {
 //                    save the book-mark and send it to fireBase storage
-//                    bookMark(model.getUrl(), model.getUrlToImage(), model.getTitle());
+                    bookMark(model.getUrl(), model.getUrlToImage(), model.getTitle());
                     Snackbar.make(v, "Bookmarked", Snackbar.LENGTH_SHORT).show();
 
                     holder.UnSaveStar.setVisibility(View.VISIBLE);
