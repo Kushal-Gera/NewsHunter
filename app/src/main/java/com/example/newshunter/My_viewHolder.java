@@ -8,12 +8,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 class My_viewHolder extends RecyclerView.ViewHolder {
 
      ImageView img, saveStar, UnSaveStar, share;
      LinearLayout main_ll;
      TextView title, description, source, author, date;
      View dateView;
+     LottieAnimationView animationView;
 
      My_viewHolder(@NonNull View itemView) {
          super(itemView);
@@ -27,10 +30,11 @@ class My_viewHolder extends RecyclerView.ViewHolder {
          author = itemView.findViewById(R.id.author);
          dateView = itemView.findViewById(R.id.dateView);
 
-         saveStar = itemView.findViewById(R.id.saveStar);
+//         saveStar = itemView.findViewById(R.id.saveStar);
          UnSaveStar = itemView.findViewById(R.id.UnSaveStar);
 
          share = itemView.findViewById(R.id.share);
+         animationView = itemView.findViewById(R.id.animation_view);
 
 
      }

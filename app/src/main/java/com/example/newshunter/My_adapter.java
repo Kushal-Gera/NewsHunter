@@ -58,7 +58,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
             holder.description.setText("Please Search Something Else");
             holder.author.setVisibility(View.GONE);
             holder.dateView.setVisibility(View.GONE);
-            holder.saveStar.setVisibility(View.GONE);
+            holder.animationView.setVisibility(View.GONE);
             holder.UnSaveStar.setVisibility(View.GONE);
         }else {
             Article[] articles = data.getArticles();
@@ -73,15 +73,15 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
 
                 //set On click listeners
             holder.UnSaveStar.setVisibility(View.GONE);
-            holder.saveStar.setOnClickListener(new View.OnClickListener() {
+            holder.animationView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    save the book-mark and send it to fireBase storage
-                    bookMark(model.getUrl(), model.getUrlToImage(), model.getTitle());
+//                    bookMark(model.getUrl(), model.getUrlToImage(), model.getTitle());
                     Snackbar.make(v, "Bookmarked", Snackbar.LENGTH_SHORT).show();
 
                     holder.UnSaveStar.setVisibility(View.VISIBLE);
-                    holder.saveStar.setVisibility(View.GONE);
+                    holder.animationView.setVisibility(View.GONE);
                 }
             });
 

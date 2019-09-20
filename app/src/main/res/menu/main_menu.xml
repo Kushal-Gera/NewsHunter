@@ -11,7 +11,7 @@
 
     <item
         android:id="@+id/bookmarks"
-        android:icon="@drawable/bookmark"
+        android:icon="@drawable/bookmark_menu"
         android:title="@string/add_note"
         app:showAsAction="ifRoom" />
 

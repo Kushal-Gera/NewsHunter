@@ -110,9 +110,6 @@
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
@@ -137,26 +134,27 @@
                     android:textStyle="bold"
                     tools:text="Source" />
 
-                <ImageView
-                    android:id="@+id/UnSaveStar"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignEnd="@+id/source"
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation_view"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_alignParentTop="true"
-                    android:layout_marginEnd="15dp"
-                    android:contentDescription="@string/image_description"
-                    android:src="@drawable/star" />
+                    android:layout_alignEnd="@+id/source"
+                    android:scaleType="centerCrop"
+                    app:lottie_rawRes="@raw/bookmark"
+                    app:lottie_loop="true"
+                    app:lottie_autoPlay="true" />
 
                 <ImageView
-                    android:id="@+id/saveStar"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:id="@+id/UnSaveStar"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
                     android:layout_alignEnd="@+id/source"
                     android:layout_alignParentTop="true"
                     android:layout_marginEnd="15dp"
-                    android:elevation="2dp"
                     android:contentDescription="@string/image_description"
-                    android:src="@drawable/star_to_select" />
+                    android:src="@drawable/bookmark_menu_red" />
 
             </RelativeLayout>
 

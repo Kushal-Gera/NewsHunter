@@ -11,17 +11,17 @@
 
         <item
             android:id="@+id/business"
-            android:icon="@drawable/bookmark"
+            android:icon="@drawable/bookmark_menu"
             android:title="@string/business_news" />
 
         <item
             android:id="@+id/wsj"
-            android:icon="@drawable/bookmark"
+            android:icon="@drawable/bookmark_menu"
             android:title="@string/wall_street_news" />
 
         <item
             android:id="@+id/tech"
-            android:icon="@drawable/bookmark"
+            android:icon="@drawable/bookmark_menu"
             android:title="@string/tech_news" />
 
     </group>
@@ -29,12 +29,12 @@
     <item android:title="@string/make_a_note">
         <menu>
             <item
-                android:icon="@drawable/bookmark"
+                android:icon="@drawable/bookmark_menu"
                 android:id="@+id/notes"
                 android:title="@string/take_notes" />
 
             <item
-                android:icon="@drawable/bookmark"
+                android:icon="@drawable/bookmark_menu"
                 android:id="@+id/show_notes"
                 android:title="@string/show_notes" />
 
