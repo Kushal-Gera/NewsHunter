@@ -47,21 +47,23 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <LinearLayout
+            android:id="@+id/suggest"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:background="@drawable/new_btn_bg"
             android:orientation="horizontal">
 
-            <ImageView
+            <com.airbnb.lottie.LottieAnimationView
                 android:layout_width="80dp"
-                android:layout_height="70dp"
-                android:contentDescription="@string/image_description"
-                android:paddingStart="30dp"
-                android:src="@drawable/sug"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_gravity="center"
+                app:lottie_rawRes="@raw/heart"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
                 tools:ignore="RtlSymmetry" />
 
             <TextView
-                android:id="@+id/suggest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -69,35 +71,104 @@
                 android:padding="10dp"
                 android:text="@string/suggestions"
                 android:textColor="@color/colorBlack"
-                android:textSize="28sp" />
+                android:textSize="25sp" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/developer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/new_btn_bg"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="70dp"
-                android:contentDescription="@string/image_description"
-                android:paddingStart="30dp"
-                android:src="@drawable/dev"
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="-20dp"
+                android:padding="15dp"
+                android:layout_gravity="center"
+                app:lottie_rawRes="@raw/dddd"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
                 tools:ignore="RtlSymmetry" />
 
             <TextView
-                android:id="@+id/developer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:padding="10dp"
+                android:layout_marginStart="-20dp"
                 android:text="@string/developers"
                 android:textColor="@color/colorBlack"
-                android:textSize="28sp" />
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Share_app"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/new_btn_bg"
+            android:orientation="horizontal">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="140dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="-20dp"
+                android:layout_gravity="center"
+                app:lottie_rawRes="@raw/share"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_marginStart="-20dp"
+                android:textAllCaps="true"
+                android:text="@string/share_app"
+                android:textColor="@color/colorBlack"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rate"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/new_btn_bg"
+            android:orientation="horizontal">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                app:lottie_rawRes="@raw/star"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_marginStart="-20dp"
+                android:textAllCaps="true"
+                android:text="@string/rate_app"
+                android:textColor="@color/colorBlack"
+                android:textSize="25sp" />
 
         </LinearLayout>
 
@@ -106,13 +177,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/thnx"
         android:textColor="#737373"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

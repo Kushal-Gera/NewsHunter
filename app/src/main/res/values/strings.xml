@@ -24,4 +24,6 @@
     <string name="suggestions">SUGGESTIONS</string>
     <string name="make_a_note">Wanna Make a Note ?</string>
     <string name="save">Save</string>
+    <string name="share_app">Share App</string>
+    <string name="rate_app">Rate App</string>
 </resources>

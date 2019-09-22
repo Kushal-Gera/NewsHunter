@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -17,7 +18,7 @@ public class SettingsAct extends AppCompatActivity {
     private static final String TAG = "SettingsAct";
     public static final String GMAIL_LINK= "kushalgera1212@gmail.com";
 
-    TextView developer, suggest;
+    LinearLayout developer, suggest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

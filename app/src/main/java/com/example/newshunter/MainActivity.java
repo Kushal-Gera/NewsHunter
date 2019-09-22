@@ -7,15 +7,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     RecyclerView recyclerView;
-    ProgressBar progressBar;
+    LottieAnimationView loading_anim;
 
     LinearLayout navBar;
     TextView nav_tv;
@@ -70,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         SlidrInterface slidrInterface = Slidr.attach(this);
         slidrInterface.lock();
 
-        progressBar = findViewById(R.id.progress_circular);
+        loading_anim = findViewById(R.id.progressBar);
 
         if (firebaseAuth.getCurrentUser() == null) {
             startActivity(new Intent(this, LoginActivity.class));
@@ -171,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadData(String url) {
-        progressBar.setVisibility(View.VISIBLE);
+        loading_anim.setVisibility(View.VISIBLE);
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -179,14 +176,14 @@ public class MainActivity extends AppCompatActivity {
                 Gson gson = builder.create();
                 User users = gson.fromJson(response, User.class);
                 recyclerView.setAdapter(new My_adapter(MainActivity.this, users));
-                progressBar.setVisibility(View.GONE);
+                loading_anim.setVisibility(View.GONE);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(MainActivity.this, "    DATA OR INTERNET\nMAY NOT BE AVAILABLE", Toast.LENGTH_LONG).show();
                 atHome = true;
-                progressBar.setVisibility(View.GONE);
+                loading_anim.setVisibility(View.GONE);
             }
         });
 
