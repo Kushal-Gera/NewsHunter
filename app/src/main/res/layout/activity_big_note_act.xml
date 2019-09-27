@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:isScrollContainer="true"
     android:background="#FFF"
-    tools:context=".NotesAct">
+    tools:context="kushal.application.newshunter.NotesAct">
 
     <LinearLayout
         android:layout_width="match_parent"

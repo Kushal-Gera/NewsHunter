@@ -1,13 +1,11 @@
-package com.example.newshunter;
+package kushal.application.newshunter;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,17 +20,16 @@ import java.util.Map;
 
 public class NotesAct extends AppCompatActivity {
 
+    //    this is done to prevent un-neccesary change and in file paths.
+    public static final String USERS = "users";
+    public static final String NOTE = "note";
+    public static final String TITLE = "title";
     EditText notes, title_EdTxt;
     Button save;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database;
     DatabaseReference myRef;
     ProgressDialog pd;
-
-//    this is done to prevent un-neccesary change and in file paths.
-    public static final String USERS = "users";
-    public static final String NOTE = "note";
-    public static final String TITLE = "title";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +61,7 @@ public class NotesAct extends AppCompatActivity {
                 String note_to_string = notes.getText().toString();
                 String title_to_string = title_EdTxt.getText().toString();
 
-                if (TextUtils.isEmpty(title_to_string) ){
+                if (TextUtils.isEmpty(title_to_string)) {
                     pd.setMessage("Fill All Required Fields...");
                     pd.show();
                     return;

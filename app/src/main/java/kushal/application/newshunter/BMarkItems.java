@@ -1,4 +1,4 @@
-package com.example.newshunter;
+package kushal.application.newshunter;
 
 public class BMarkItems {
 

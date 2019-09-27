@@ -1,15 +1,10 @@
-package com.example.newshunter;
+package kushal.application.newshunter;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -17,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,8 +32,8 @@ public class Big_image_act extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void getIncomingIntent(){
-        if ( getIntent().hasExtra("image_url") && getIntent().hasExtra("big_title") ){
+    private void getIncomingIntent() {
+        if (getIntent().hasExtra("image_url") && getIntent().hasExtra("big_title")) {
 
             ImageView big_img = findViewById(R.id.big_img);
             ImageView share = findViewById(R.id.share2);
@@ -64,17 +58,18 @@ public class Big_image_act extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
 //            webView.getSettings().setJavaScriptEnabled(true);
             webView.setWebChromeClient(new WebChromeClient());    // set chrome client
-            webView.setWebViewClient(new WebViewClient(){         // set web view client
+            webView.setWebViewClient(new WebViewClient() {         // set web view client
                 @Override
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
                     super.onPageStarted(view, url, favicon);
                 }
+
                 @Override
                 public void onPageFinished(WebView view, String url) {
                     super.onPageFinished(view, url);
                     progressBar.setVisibility(View.GONE);
                 }
-            } );
+            });
 
             //web view btn set up
             btn.setOnClickListener(new View.OnClickListener() {
@@ -99,10 +94,8 @@ public class Big_image_act extends AppCompatActivity {
             });
 
 
-
         }
     }
-
 
 
 }

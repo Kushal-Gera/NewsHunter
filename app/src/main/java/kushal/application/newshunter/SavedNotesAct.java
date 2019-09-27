@@ -1,4 +1,4 @@
-package com.example.newshunter;
+package kushal.application.newshunter;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -7,12 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,21 +26,18 @@ import com.google.firebase.database.ValueEventListener;
 import com.r0adkll.slidr.Slidr;
 
 public class SavedNotesAct extends AppCompatActivity {
+    //    this is done to prevent un-necessary change and in file paths.
+    public static final String USERS = "users";
+    public static final String NOTEID = "noteId";
+    public static final String NOTE = "note";
+    public static final String TITLE = "title";
     private static final String TAG = "SavedNotesAct";
-
     ProgressDialog pd;
     RecyclerView note_recView;
     DatabaseReference ref;
     FirebaseAuth auth;
     FirebaseRecyclerOptions<NoteItems> options;
     FirebaseRecyclerAdapter<NoteItems, Note_viewholder> adapter;
-
-//    this is done to prevent un-necessary change and in file paths.
-    public static final String USERS = "users";
-    public static final String NOTEID = "noteId";
-    public static final String NOTE = "note";
-    public static final String TITLE = "title";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +51,11 @@ public class SavedNotesAct extends AppCompatActivity {
         pd.show();
 
         final View content = findViewById(R.id.content);
-        Snackbar.make(content , "Tap Any Note To Edit", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(content, "Tap Any Note To Edit", Snackbar.LENGTH_LONG).show();
 
         //To sort it upside down
         note_recView = findViewById(R.id.note_recView);
-        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         note_recView.setLayoutManager(linearLayoutManager);
@@ -68,16 +63,16 @@ public class SavedNotesAct extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null)
-            ref = FirebaseDatabase.getInstance().getReference().child(USERS).child(auth.getCurrentUser().getUid() );
+            ref = FirebaseDatabase.getInstance().getReference().child(USERS).child(auth.getCurrentUser().getUid());
 
-        if (ref.getKey() == null){
+        if (ref.getKey() == null) {
             pd.dismiss();
             Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
             return;
         }
 
         options = new FirebaseRecyclerOptions.Builder<NoteItems>()
-                        .setQuery(ref, NoteItems.class).build();
+                .setQuery(ref, NoteItems.class).build();
 
         adapter = new FirebaseRecyclerAdapter<NoteItems, Note_viewholder>(options) {
             @Override
@@ -85,13 +80,13 @@ public class SavedNotesAct extends AppCompatActivity {
 
                 final String noteId = getRef(i).getKey();
 
-                if (noteId != null ) {
+                if (noteId != null) {
                     ref.child(noteId).addValueEventListener(new ValueEventListener() {
 
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            if (dataSnapshot.hasChild(TITLE) && dataSnapshot.hasChild(NOTE) ){
+                            if (dataSnapshot.hasChild(TITLE) && dataSnapshot.hasChild(NOTE)) {
                                 final String title = dataSnapshot.child(TITLE).getValue().toString();
                                 final String note_text = dataSnapshot.child(NOTE).getValue().toString();
 
@@ -140,10 +135,7 @@ public class SavedNotesAct extends AppCompatActivity {
         note_recView.setAdapter(adapter);
 
 
-
-
     }
-
 
 
 }

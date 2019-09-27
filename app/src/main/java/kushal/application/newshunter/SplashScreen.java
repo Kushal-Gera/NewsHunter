@@ -1,12 +1,13 @@
-package com.example.newshunter;
-
-import androidx.appcompat.app.AppCompatActivity;
+package kushal.application.newshunter;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -14,6 +15,9 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         Handler h = new Handler();
         h.postDelayed(new Runnable() {

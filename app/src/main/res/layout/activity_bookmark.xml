@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#cdcdcd"
-    tools:context=".Bookmark">
+    tools:context="kushal.application.newshunter.Bookmark">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_bm"

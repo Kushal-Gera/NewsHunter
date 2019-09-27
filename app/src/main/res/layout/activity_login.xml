@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splash_bg"
-    tools:context=".LoginActivity">
+    tools:context="kushal.application.newshunter.LoginActivity">
 
     <ImageView
         android:contentDescription="@string/image_description"

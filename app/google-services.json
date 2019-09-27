@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:575524833933:android:a9f687254570c3c8",
         "android_client_info": {
-          "package_name": "com.example.newshunter"
+          "package_name": "kushal.application.newshunter"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "575524833933-9qv5cea5r9r8ctfu3p3jkjcjdqerepfd.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.newshunter",
+            "package_name": "kushal.application.newshunter",
             "certificate_hash": "1ebd1b1ebc60dd0193d75ff904e92ee49592e2e5"
           }
         },

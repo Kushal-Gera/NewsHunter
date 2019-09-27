@@ -1,4 +1,4 @@
-package com.example.newshunter;
+package kushal.application.newshunter;
 
 import android.view.View;
 import android.widget.TextView;

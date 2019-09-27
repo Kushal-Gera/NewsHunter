@@ -1,4 +1,4 @@
-package com.example.newshunter;
+package kushal.application.newshunter;
 
 public class NoteItems {
 
@@ -10,12 +10,12 @@ public class NoteItems {
         return title;
     }
 
-    public String getNote() {
-        return note;
-    }
-
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getNote() {
+        return note;
     }
 
     public void setNote(String note) {

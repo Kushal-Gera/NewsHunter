@@ -1,7 +1,5 @@
+package kushal.application.newshunter;
 
-package com.example.newshunter;
-
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

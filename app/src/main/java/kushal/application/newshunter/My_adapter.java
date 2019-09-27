@@ -1,4 +1,4 @@
-package com.example.newshunter;
+package kushal.application.newshunter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
+public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
     private static final String TAG = "My_adapter";
     private static final String BOOK_MARK = "bookmarks";
     private static final String LINK = "link";
@@ -53,14 +53,14 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
     @Override
     public void onBindViewHolder(@NonNull final My_viewHolder holder, final int position) {
 
-        if (flag){
+        if (flag) {
             holder.title.setText("No Result Found...");
             holder.description.setText("Please Search Something Else");
             holder.author.setVisibility(View.GONE);
             holder.dateView.setVisibility(View.GONE);
             holder.animationView.setVisibility(View.GONE);
             holder.UnSaveStar.setVisibility(View.GONE);
-        }else {
+        } else {
             Article[] articles = data.getArticles();
             final Article model = articles[position];
 
@@ -71,7 +71,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
             holder.date.setText(getDate(model.getPublishedAt()));
             Glide.with(myContext).load(model.getUrlToImage()).placeholder(R.drawable.placeholder).centerCrop().into(holder.img);
 
-                //set On click listeners
+            //set On click listeners
             holder.UnSaveStar.setVisibility(View.GONE);
             holder.animationView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -119,17 +119,17 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder>{
 
     @Override
     public int getItemCount() {
-        return data.getArticles().length<1 ? 1 : data.getArticles().length;
+        return data.getArticles().length < 1 ? 1 : data.getArticles().length;
     }
 
-    private String getDate(String oldDate){
+    private String getDate(String oldDate) {
         String newDate;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", new Locale("india"));
         try {
             @SuppressLint("SimpleDateFormat")
             Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(oldDate);
             newDate = dateFormat.format(date);
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d(TAG, "getDate: date error" + e.getMessage());
             newDate = oldDate;
         }

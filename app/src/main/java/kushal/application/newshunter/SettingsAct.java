@@ -1,6 +1,4 @@
-package com.example.newshunter;
-
-import androidx.appcompat.app.AppCompatActivity;
+package kushal.application.newshunter;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -8,18 +6,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.r0adkll.slidr.Slidr;
 
 public class SettingsAct extends AppCompatActivity {
+    public static final String GMAIL_LINK = "kushalgera1212@gmail.com";
     private static final String TAG = "SettingsAct";
-    public static final String GMAIL_LINK= "kushalgera1212@gmail.com";
-    public static final String APP_LINK= "http://play.google.com/store/apps/details?id=" + "com.android.chrome";
-    //                            KUri.parse("http://play.google.com/store/apps/details?id=" + getPackageName() )));   to be used
+    public final String WEB_APP_LINK = "http://play.google.com/store/apps/details?id=" + getPackageName();
 
     LinearLayout developer, suggest, share, rate;
 
@@ -58,7 +54,7 @@ public class SettingsAct extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("text/plain");
-                i.putExtra(Intent.EXTRA_TEXT, APP_LINK);
+                i.putExtra(Intent.EXTRA_TEXT, WEB_APP_LINK);
 
                 startActivity(Intent.createChooser(i, "Share via"));
             }
@@ -70,19 +66,14 @@ public class SettingsAct extends AppCompatActivity {
                 //open my app in playStore
                 try {
                     startActivity(new Intent(Intent.ACTION_VIEW,
-//                            Uri.parse("market://details?id=" + getPackageName() )));    to be used...
-                            Uri.parse("market://details?id=" + "com.android.chrome" )));
-
-                }
-                catch (ActivityNotFoundException e){
+                            Uri.parse("market://details?id=" + getPackageName())));
+                } catch (ActivityNotFoundException e) {
                     startActivity(new Intent(Intent.ACTION_VIEW,
-//                            Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName() )));   to be used
-                            Uri.parse(APP_LINK)));
+                            Uri.parse(WEB_APP_LINK)));
                 }
 
             }
         });
-
 
 
     }
