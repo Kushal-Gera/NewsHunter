@@ -3,9 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="kushal.application.newshunter">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_round"
@@ -14,41 +11,45 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="kushal.application.newshunter.SplashScreen"
+        <activity android:name=".ForgotAct"></activity>
+        <activity
+            android:name=".SplashScreen"
             android:theme="@style/AppTheme.Splash">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-            </activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
-            android:name="kushal.application.newshunter.SettingsAct"
+            android:name=".SettingsAct"
             android:theme="@style/AppTheme.transparent" />
         <activity
-            android:name="kushal.application.newshunter.Bookmark"
+            android:name=".Bookmark"
             android:theme="@style/AppTheme.transparent" />
         <activity
-            android:name="kushal.application.newshunter.BIg_note_act"
+            android:name=".BIg_note_act"
             android:theme="@style/AppTheme.transparent" />
         <activity
-            android:name="kushal.application.newshunter.SavedNotesAct"
+            android:name=".SavedNotesAct"
             android:theme="@style/AppTheme.transparent" />
         <activity
-            android:name="kushal.application.newshunter.NotesAct"
+            android:name=".NotesAct"
+            android:theme="@style/AppTheme.transparent" />
+        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".Big_image_act"
             android:theme="@style/AppTheme.transparent" />
         <activity
-            android:name="kushal.application.newshunter.LoginActivity"/>
-        <activity
-            android:name="kushal.application.newshunter.Big_image_act"
-            android:theme="@style/AppTheme.transparent" />
-        <activity
-            android:name="kushal.application.newshunter.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

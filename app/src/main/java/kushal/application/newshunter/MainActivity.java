@@ -37,6 +37,8 @@ import com.google.gson.GsonBuilder;
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrInterface;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
 
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String greetings() {
 
-        String name = firebaseAuth.getCurrentUser().getEmail();
+        String name = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail();
         assert name != null;
         char[] ch = name.toCharArray();
         char[] new_name = new char[20];

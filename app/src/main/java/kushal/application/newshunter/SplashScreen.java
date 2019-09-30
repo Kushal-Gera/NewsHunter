@@ -26,7 +26,7 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(new Intent(SplashScreen.this, LoginActivity.class));
                 finish();
             }
-        }, 1200);
+        }, 800);
 
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha_anim);
         findViewById(R.id.iv).setAnimation(animation);

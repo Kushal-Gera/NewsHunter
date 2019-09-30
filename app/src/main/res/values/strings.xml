@@ -26,4 +26,7 @@
     <string name="save">Save</string>
     <string name="share_app">Share App</string>
     <string name="rate_app">Rate Us</string>
+    <string name="forgot_password">Forgot Password ? </string>
+    <string name="send">Send</string>
+    <string name="enter_email_id">Please enter your Email ID to get a verification code</string>
 </resources>

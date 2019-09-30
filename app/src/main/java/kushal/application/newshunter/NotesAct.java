@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -73,6 +74,7 @@ public class NotesAct extends AppCompatActivity {
 
 //                call function to save data
                 saveData(note_to_string, title_to_string);
+                Toast.makeText(NotesAct.this, "Saved", Toast.LENGTH_SHORT).show();
                 finish();
 
             }

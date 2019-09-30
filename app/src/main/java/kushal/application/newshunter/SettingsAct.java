@@ -15,7 +15,7 @@ import com.r0adkll.slidr.Slidr;
 public class SettingsAct extends AppCompatActivity {
     public static final String GMAIL_LINK = "kushalgera1212@gmail.com";
     private static final String TAG = "SettingsAct";
-    public final String WEB_APP_LINK = "http://play.google.com/store/apps/details?id=" + getPackageName();
+    public final String WEB_APP_LINK = "http://play.google.com/store/apps/details?id=" + "kushal.application.newshunter";
 
     LinearLayout developer, suggest, share, rate;
 
@@ -34,7 +34,14 @@ public class SettingsAct extends AppCompatActivity {
         developer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "App by Kushal Gera", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(v, "App by Kushal Gera", Snackbar.LENGTH_LONG)
+                        .setAction("Share App", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                shareIT();
+                            }
+                        })
+                        .setActionTextColor(getResources().getColor(R.color.colorPrimary)).show();
             }
         });
 
@@ -52,29 +59,36 @@ public class SettingsAct extends AppCompatActivity {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_SEND);
-                i.setType("text/plain");
-                i.putExtra(Intent.EXTRA_TEXT, WEB_APP_LINK);
-
-                startActivity(Intent.createChooser(i, "Share via"));
+                shareIT();
             }
         });
 
         rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //open my app in playStore
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("market://details?id=" + getPackageName())));
-                } catch (ActivityNotFoundException e) {
-                    startActivity(new Intent(Intent.ACTION_VIEW,
-                            Uri.parse(WEB_APP_LINK)));
-                }
-
+                rateUs();
             }
         });
 
+    }
+
+    private void shareIT() {
+
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+        i.putExtra(Intent.EXTRA_TEXT, WEB_APP_LINK);
+
+        startActivity(Intent.createChooser(i, "Share Via"));
+    }
+
+    private void rateUs() {
+//        open playstore if present
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("market://details?id=" + getPackageName())));
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(WEB_APP_LINK)));
+        }
 
     }
 }
