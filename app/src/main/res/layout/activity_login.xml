@@ -10,7 +10,7 @@
     tools:context="kushal.application.newshunter.LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:paddingBottom="40dp"
+        android:paddingBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -19,7 +19,7 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="20dp"
             android:src="@drawable/spalsh_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/bg_nav_btn"
             android:orientation="vertical"
@@ -52,8 +52,8 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/email"
-                    android:contentDescription="@string/image_description" />
+                    android:contentDescription="@string/image_description"
+                    android:src="@drawable/email" />
 
                 <EditText
                     android:id="@+id/email"
@@ -61,8 +61,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="40dp"
                     android:hint="@string/enter_email"
-                    android:inputType="textEmailAddress"
-                    android:importantForAutofill="no" />
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress" />
 
             </LinearLayout>
 
@@ -77,8 +77,8 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/password"
-                    android:contentDescription="@string/image_description" />
+                    android:contentDescription="@string/image_description"
+                    android:src="@drawable/password" />
 
                 <EditText
                     android:id="@+id/password"
@@ -86,33 +86,53 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:hint="@string/enter_password"
-                    android:inputType="textPassword"
-                    android:importantForAutofill="no" />
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword" />
 
                 <ImageButton
                     android:id="@+id/eye"
                     android:layout_width="40dp"
-                    android:layout_marginEnd="4dp"
                     android:layout_height="40dp"
+                    android:layout_marginEnd="4dp"
                     android:background="#FFEBEE"
-                    android:src="@drawable/eye"
-                    android:contentDescription="@string/image_description" />
+                    android:contentDescription="@string/image_description"
+                    android:src="@drawable/eye" />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/forgot"
-                android:textStyle="italic"
-                android:textSize="16sp"
-                android:gravity="end"
-                android:textColor="#444"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="40dp"
-                android:text="@string/forgot_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
+                android:gravity="end"
+                android:text="@string/forgot_password"
+                android:textColor="#444"
+                android:textSize="16sp"
+                android:textStyle="italic"
                 tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:text="@string/login_with_phone"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/phone_login"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/back"
+                android:padding="10dp"
+                android:background="@drawable/phone_btn"
+                android:contentDescription="@string/image_description" />
 
         </LinearLayout>
 

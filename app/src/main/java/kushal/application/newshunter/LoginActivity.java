@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText email, password;
     TextView forgot;
+    ImageView phone_login;
     Button login, signup;
     FirebaseAuth firebaseAuth;
     ImageButton eye;
@@ -41,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         email = findViewById(R.id.email);
+        phone_login = findViewById(R.id.phone_login);
         forgot = findViewById(R.id.forgot);
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
@@ -85,6 +88,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, ForgotAct.class));
+            }
+        });
+
+        phone_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, PhoneLoginAct.class));
+                finish();
             }
         });
 

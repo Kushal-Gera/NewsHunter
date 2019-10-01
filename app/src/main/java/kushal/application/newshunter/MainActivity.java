@@ -71,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
         loading_anim = findViewById(R.id.progressBar);
 
-        String name = greetings();
-        Toast.makeText(this, "Hello " + name, Toast.LENGTH_SHORT).show();
         ////////////////////////////////////////////////////////////////////////////////////////////
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -148,21 +146,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private String greetings() {
-
-        String name = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail();
-        assert name != null;
-        char[] ch = name.toCharArray();
-        char[] new_name = new char[20];
-
-        for (int i = 0; i < name.length(); i++) {
-            if (ch[i] == '@')
-                break;
-            new_name[i] = ch[i];
-        }
-        return String.valueOf(new_name);
     }
 
     public void setUpToolBar() {
