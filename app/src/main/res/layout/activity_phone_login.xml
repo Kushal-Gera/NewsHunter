@@ -40,44 +40,64 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-            <EditText
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_marginTop="30dp"
-                android:id="@+id/phone"
-                android:paddingStart="5dp"
-                android:layout_width="300dp"
-                android:layout_height="0dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="30dp"
-                android:layout_weight="10"
-                android:hint="@string/enter_phone_number"
-                android:inputType="phone"
-                android:textColor="@color/colorBlack"
-                android:textColorHint="#444"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
-                android:importantForAutofill="no"
-                tools:ignore="RtlSymmetry" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/image_description"
+                    android:src="@drawable/phone" />
+
+                <EditText
+                    android:id="@+id/phone"
+                    android:paddingStart="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enter_phone_number"
+                    android:inputType="phone"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="#444"
+                    android:textSize="18sp"
+                    android:importantForAutofill="no"
+                    tools:ignore="RtlSymmetry" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="40dp"
+                android:layout_marginEnd="30dp"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/image_description"
+                android:src="@drawable/password" />
 
             <EditText
                 android:id="@+id/otp"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingStart="5dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="40dp"
                 android:hint="@string/enter_otp"
                 android:inputType="number"
                 android:textColor="@color/colorBlack"
                 android:textColorHint="#444"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phone"
                 android:importantForAutofill="no"
                 tools:ignore="RtlSymmetry" />
+
+        </LinearLayout>
 
         </LinearLayout>
 
