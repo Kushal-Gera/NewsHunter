@@ -237,9 +237,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SettingsAct.class));
                 break;
 
-            case R.id.bookmarks:
-                startActivity(new Intent(this, Bookmark.class));
-                break;
+//            case R.id.bookmarks:
+//                startActivity(new Intent(this, Bookmark.class));
+//                break;
 
             case R.id.logout:
                 signOut();
