@@ -36,11 +36,11 @@
 
     </LinearLayout>
 
+        android:layout_gravity="start"
     <LinearLayout
         android:id="@+id/navBar"
         android:layout_width="240dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
         android:background="@color/colorPrimaryTransparent"
         android:orientation="vertical">
 
@@ -91,17 +91,16 @@
             android:text="@string/tech_news" />
 
         <TextView
-            android:visibility="gone"
             android:text="@string/make_a_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:layout_marginStart="30dp"
+            android:gravity="start"
+            android:layout_marginStart="35dp"
             android:textColor="@color/colorBlack"
             android:layout_marginTop="22dp"/>
 
         <TextView
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginTop="2dp"
@@ -109,7 +108,6 @@
             android:background="@drawable/seperator_subtle" />
 
         <Button
-            android:visibility="gone"
             android:id="@+id/notes"
             android:layout_width="170dp"
             android:layout_height="50dp"
@@ -118,7 +116,6 @@
             android:text="@string/take_notes" />
 
         <Button
-            android:visibility="gone"
             android:id="@+id/show_notes"
             android:layout_width="170dp"
             android:layout_height="50dp"

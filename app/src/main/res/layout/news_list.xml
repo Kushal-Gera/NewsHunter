@@ -135,7 +135,6 @@
                     tools:text="Source" />
 
                 <com.airbnb.lottie.LottieAnimationView
-                    android:visibility="gone"
                     android:id="@+id/animation_view"
                     android:layout_width="50dp"
                     android:layout_height="35dp"
@@ -149,7 +148,6 @@
                     app:lottie_autoPlay="true" />
 
                 <ImageView
-                    android:visibility="gone"
                     android:id="@+id/UnSaveStar"
                     android:layout_width="30dp"
                     android:layout_height="35dp"
