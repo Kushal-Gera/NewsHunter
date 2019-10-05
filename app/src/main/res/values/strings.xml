@@ -3,7 +3,7 @@
     <string name="image_description">image will be updated with content from the news feed</string>
     <string name="app_heading">Latest News Available</string>
     <string name="menu_search">Search</string>
-    <string name="menu_setting">About</string>
+    <string name="menu_setting">About Us</string>
     <string name="search_hint">Enter News Tags</string>
     <string name="btn_txt">Load Full View</string>
     <string name="business_news">Business News</string>
@@ -19,7 +19,7 @@
     <string name="take_notes">Take Notes</string>
     <string name="show_notes">Saved Notes</string>
     <string name="add_note">Add A Note</string>
-    <string name="thnx">Special Thanks to \'NewsApi.org\' for providing FREE API USAGE</string>
+    <string name="thnx">Special Thanks to \'NewsApi.org\' for providing FREE API USAGE.\nClick to know more</string>
     <string name="developers">DEVELOPERS</string>
     <string name="suggestions">SUGGESTIONS</string>
     <string name="make_a_note">Wanna Make a Note ?</string>

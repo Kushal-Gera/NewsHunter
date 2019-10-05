@@ -181,11 +181,10 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/api_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_margin="10dp"
         android:gravity="center"
         android:text="@string/thnx"
         android:textColor="#737373"

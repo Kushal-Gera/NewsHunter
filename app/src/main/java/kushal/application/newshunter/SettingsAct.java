@@ -4,8 +4,10 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,15 +16,19 @@ import com.r0adkll.slidr.Slidr;
 
 public class SettingsAct extends AppCompatActivity {
     public static final String GMAIL_LINK = "kushalgera1212@gmail.com";
+    public static final String GITHUB_LINK = "https://github.com/Kushal-Gera";
+    public static final String API_LINK = "https://newsapi.org/";
     private static final String TAG = "SettingsAct";
     public final String WEB_APP_LINK = "http://play.google.com/store/apps/details?id=" + "kushal.application.newshunter";
 
     LinearLayout developer, suggest, share, rate;
+    TextView api_link;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        Log.d(TAG, "onCreate: started");
 
         Slidr.attach(this);
 
@@ -30,15 +36,16 @@ public class SettingsAct extends AppCompatActivity {
         suggest = findViewById(R.id.suggest);
         share = findViewById(R.id.Share_app);
         rate = findViewById(R.id.rate);
+        api_link = findViewById(R.id.api_link);
 
         developer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "App by Kushal Gera", Snackbar.LENGTH_LONG)
-                        .setAction("Share App", new View.OnClickListener() {
+                Snackbar.make(v, "App by Kushal Gera\nTo Know More -->", Snackbar.LENGTH_LONG)
+                        .setAction("GIT HUB", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                shareIT();
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GITHUB_LINK)));
                             }
                         })
                         .setActionTextColor(getResources().getColor(R.color.colorPrimary)).show();
@@ -67,6 +74,13 @@ public class SettingsAct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 rateUs();
+            }
+        });
+
+        api_link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(API_LINK)));
             }
         });
 
