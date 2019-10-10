@@ -62,7 +62,7 @@
                     android:hint="@string/enter_phone_number"
                     android:inputType="phone"
                     android:textColor="@color/colorBlack"
-                    android:textColorHint="#444"
+                    android:textColorHint="#666"
                     android:textSize="18sp"
                     android:importantForAutofill="no"
                     tools:ignore="RtlSymmetry" />
@@ -92,7 +92,7 @@
                 android:hint="@string/enter_otp"
                 android:inputType="number"
                 android:textColor="@color/colorBlack"
-                android:textColorHint="#444"
+                android:textColorHint="#666"
                 android:textSize="18sp"
                 android:importantForAutofill="no"
                 tools:ignore="RtlSymmetry" />

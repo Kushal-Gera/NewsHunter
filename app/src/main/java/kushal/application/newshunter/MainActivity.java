@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         slidrInterface.lock();
 
         loading_anim = findViewById(R.id.progressBar);
-
         ////////////////////////////////////////////////////////////////////////////////////////////
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -237,9 +236,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SettingsAct.class));
                 break;
 
-//            case R.id.bookmarks:
-//                startActivity(new Intent(this, Bookmark.class));
-//                break;
+            case R.id.bookmarks:
+                startActivity(new Intent(this, Bookmark.class));
+                break;
 
             case R.id.logout:
                 signOut();

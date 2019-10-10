@@ -132,7 +132,7 @@
                     android:textSize="19sp"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="#333"
                     android:text="@string/login_with_phone"
                     android:layout_width="230dp"
                     android:layout_height="45dp"/>
