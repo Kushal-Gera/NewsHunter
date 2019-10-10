@@ -92,7 +92,7 @@
                 android:layout_marginStart="-20dp"
                 android:padding="15dp"
                 android:layout_gravity="center"
-                app:lottie_rawRes="@raw/dddd"
+                app:lottie_rawRes="@raw/dev"
                 app:lottie_loop="true"
                 app:lottie_autoPlay="true"
                 tools:ignore="RtlSymmetry" />

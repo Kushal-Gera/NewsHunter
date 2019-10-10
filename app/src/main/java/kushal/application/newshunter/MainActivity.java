@@ -37,8 +37,6 @@ import com.google.gson.GsonBuilder;
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrInterface;
 
-import java.util.Objects;
-
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
 
@@ -50,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     TextView nav_tv;
     Button home, wsj, business, tech, notes, show_notes;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    LottieAnimationView network;
 
     public long time = 0;
     private boolean searchUsed = false;
@@ -70,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         slidrInterface.lock();
 
         loading_anim = findViewById(R.id.progressBar);
+        network = findViewById(R.id.network);
         ////////////////////////////////////////////////////////////////////////////////////////////
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -181,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "    DATA OR INTERNET\nMAY NOT BE AVAILABLE", Toast.LENGTH_LONG).show();
                 atHome = true;
                 loading_anim.setVisibility(View.GONE);
+                network.setVisibility(View.VISIBLE);
             }
         });
 
