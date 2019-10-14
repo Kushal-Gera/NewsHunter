@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, "    DATA OR INTERNET\nMAY NOT BE AVAILABLE", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "News Data or Internet\n May Not be Available", Toast.LENGTH_LONG).show();
                 atHome = true;
                 loading_anim.setVisibility(View.GONE);
                 network.setVisibility(View.VISIBLE);

@@ -61,7 +61,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 app:lottie_rawRes="@raw/heart"
-                app:lottie_loop="true"
+                app:lottie_loop="false"
                 app:lottie_autoPlay="true"
                 tools:ignore="RtlSymmetry" />
 
@@ -125,7 +125,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 app:lottie_rawRes="@raw/star"
-                app:lottie_loop="true"
+                app:lottie_loop="false"
                 app:lottie_autoPlay="true"
                 tools:ignore="RtlSymmetry" />
 
