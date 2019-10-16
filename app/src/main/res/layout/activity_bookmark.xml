@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="20dp"
-            android:text="Book Marks"
+            android:text="@string/book_marks"
             android:textStyle="bold"
             android:textColor="@color/colorBlack"
             android:textSize="25sp" />

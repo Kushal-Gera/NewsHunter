@@ -27,7 +27,7 @@
                 android:layout_height="60dp"
                 android:background="#FFEBEE"
                 android:gravity="center"
-                android:text="Edit Note"
+                android:text="@string/edit_note"
                 android:textColor="@color/colorBlack"
                 android:textSize="32sp" />
 
@@ -38,7 +38,7 @@
                 android:layout_marginTop="60dp"
                 android:layout_marginEnd="20dp"
                 android:shadowColor="@color/colorBlack"
-                android:text="Title : "
+                android:text="@string/title"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -51,11 +51,11 @@
                 android:layout_marginTop="-8dp"
                 android:layout_marginEnd="16dp"
                 android:focusable="auto"
-                android:focusedByDefault="false"
                 android:hint="Enter Title Here (required)"
                 android:textColor="@color/colorBlack"
                 android:textSize="22sp"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="16dp"
-                android:text="Description : "
+                android:text="@string/description"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -80,7 +80,6 @@
                     android:layout_marginTop="-8dp"
                     android:layout_marginEnd="16dp"
                     android:focusable="auto"
-                    android:focusedByDefault="false"
                     android:hint="Enter Text Briefly (optional)"
                     android:textSize="18sp"
                     tools:ignore="HardcodedText"
@@ -102,10 +101,11 @@
                     android:layout_marginTop="80dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_nav_btn"
-                    android:text="Update"
+                    android:text="@string/update"
                     android:textSize="16sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/delete"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="ButtonStyle" />
 
                 <Button
                     android:id="@+id/delete"
@@ -116,11 +116,11 @@
                     android:layout_marginEnd="34dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_nav_btn"
-                    android:text="Delete"
-                    android:textSize="16sp" />
+                    android:text="@string/delete"
+                    android:textSize="16sp"
+                    tools:ignore="ButtonStyle" />
 
             </LinearLayout>
-
 
         </LinearLayout>
 
