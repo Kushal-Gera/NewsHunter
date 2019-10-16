@@ -11,6 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/app_ID"/>
+
         <activity android:name=".PhoneLoginAct"></activity>
         <activity android:name=".ForgotAct" />
         <activity

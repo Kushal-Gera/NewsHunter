@@ -43,4 +43,6 @@ dependencies {
     implementation 'com.r0adkll:slidableactivity:2.1.0'
 
     implementation 'com.airbnb.android:lottie:3.0.7'
+    implementation 'com.google.android.gms:play-services-ads:18.2.0'
+
 }

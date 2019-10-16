@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.snackbar.Snackbar;
 import com.r0adkll.slidr.Slidr;
 
@@ -23,6 +26,7 @@ public class SettingsAct extends AppCompatActivity {
 
     LinearLayout developer, suggest, share, rate;
     TextView api_link;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,15 @@ public class SettingsAct extends AppCompatActivity {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(API_LINK)));
             }
         });
+
+
+//      ad stuff......
+        AdView adView;
+
+        MobileAds.initialize(this, getResources().getString(R.string.BANNER_ID));
+        adView = findViewById(R.id.adView);
+        adView.loadAd(new AdRequest.Builder().build());
+
 
     }
 

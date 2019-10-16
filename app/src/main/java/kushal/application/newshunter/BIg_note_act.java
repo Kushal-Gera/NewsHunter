@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -78,6 +81,14 @@ public class BIg_note_act extends AppCompatActivity {
                 deleteIt(newRef);
             }
         });
+
+
+//      ad stuff......
+        AdView adView;
+
+        MobileAds.initialize(this, getResources().getString(R.string.BANNER_ID));
+        adView = findViewById(R.id.adView3);
+        adView.loadAd(new AdRequest.Builder().build());
 
     }
 

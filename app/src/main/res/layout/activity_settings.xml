@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ddd"
+    android:keepScreenOn="true"
     tools:context="kushal.application.newshunter.SettingsAct">
 
     <androidx.appcompat.widget.Toolbar
@@ -19,29 +20,29 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginStart="10dp"
-            android:src="@mipmap/ic_launcher_round"
-            android:contentDescription="@string/image_description" />
+            android:contentDescription="@string/image_description"
+            android:src="@mipmap/ic_launcher_round" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="20dp"
             android:text="About Us"
-            android:textStyle="bold"
             android:textColor="@color/colorBlack"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="5dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,25 +53,25 @@
             android:id="@+id/suggest"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:padding="2dp"
             android:background="@drawable/new_btn_bg"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="2dp">
 
             <com.airbnb.lottie.LottieAnimationView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                app:lottie_rawRes="@raw/heart"
-                app:lottie_loop="false"
                 app:lottie_autoPlay="true"
+                app:lottie_loop="false"
+                app:lottie_rawRes="@raw/heart"
                 tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="end"
                 android:layout_marginEnd="10dp"
+                android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/suggestions"
                 android:textColor="@color/colorBlack"
@@ -89,22 +90,22 @@
             <com.airbnb.lottie.LottieAnimationView
                 android:layout_width="140dp"
                 android:layout_height="140dp"
+                android:layout_gravity="center"
                 android:layout_marginStart="-20dp"
                 android:padding="15dp"
-                android:layout_gravity="center"
-                app:lottie_rawRes="@raw/dev"
-                app:lottie_loop="true"
                 app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/dev"
                 tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="end"
-                android:layout_marginEnd="10dp"
-                android:padding="10dp"
                 android:layout_marginStart="-20dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="end"
+                android:padding="10dp"
                 android:text="@string/developers"
                 android:textColor="@color/colorBlack"
                 android:textSize="25sp" />
@@ -124,21 +125,21 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
-                app:lottie_rawRes="@raw/star"
-                app:lottie_loop="false"
                 app:lottie_autoPlay="true"
+                app:lottie_loop="false"
+                app:lottie_rawRes="@raw/star"
                 tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="end"
-                android:layout_marginEnd="10dp"
-                android:padding="10dp"
                 android:layout_marginStart="-20dp"
-                android:textAllCaps="true"
+                android:layout_marginEnd="10dp"
+                android:gravity="end"
+                android:padding="10dp"
                 android:text="@string/rate_app"
+                android:textAllCaps="true"
                 android:textColor="@color/colorBlack"
                 android:textSize="25sp" />
 
@@ -154,25 +155,25 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:layout_width="140dp"
-                android:layout_marginTop="5dp"
                 android:layout_height="140dp"
-                android:layout_marginStart="-20dp"
                 android:layout_gravity="center"
-                app:lottie_rawRes="@raw/share"
-                app:lottie_loop="true"
+                android:layout_marginStart="-20dp"
+                android:layout_marginTop="5dp"
                 app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/share"
                 tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="end"
-                android:layout_marginEnd="10dp"
-                android:padding="10dp"
                 android:layout_marginStart="-20dp"
-                android:textAllCaps="true"
+                android:layout_marginEnd="10dp"
+                android:gravity="end"
+                android:padding="10dp"
                 android:text="@string/share_app"
+                android:textAllCaps="true"
                 android:textColor="@color/colorBlack"
                 android:textSize="25sp" />
 
@@ -184,13 +185,30 @@
         android:id="@+id/api_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="50dp"
         android:gravity="center"
         android:text="@string/thnx"
         android:textColor="#737373"
-        android:textSize="24sp"
+        android:textSize="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SpUsage" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:adSize="BANNER"
+        app:adUnitId="@string/BANNER_ID"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

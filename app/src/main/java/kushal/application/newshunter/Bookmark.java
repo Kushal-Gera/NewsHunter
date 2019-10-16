@@ -17,6 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,8 +47,16 @@ public class Bookmark extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmark);
-
         Slidr.attach(this);
+
+
+//      ad stuff......
+        AdView adView;
+
+        MobileAds.initialize(this, getResources().getString(R.string.BANNER_ID));
+        adView = findViewById(R.id.adView6);
+        adView.loadAd(new AdRequest.Builder().build());
+
 
         recyclerView = findViewById(R.id.bk_recView);
 

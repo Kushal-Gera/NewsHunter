@@ -16,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -43,8 +46,16 @@ public class SavedNotesAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_notes);
-
         Slidr.attach(this);
+
+
+//      ad stuff......
+        AdView adView;
+
+        MobileAds.initialize(this, getResources().getString(R.string.BANNER_ID));
+        adView = findViewById(R.id.adView5);
+        adView.loadAd(new AdRequest.Builder().build());
+
 
         pd = new ProgressDialog(this);
         pd.setMessage("Loading, PLease Wait");

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +32,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -59,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
     public static final String businessURL = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=cb9951ac79724fe7a06b2c30afb1d831";
     public static final String wsjURL = "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=cb9951ac79724fe7a06b2c30afb1d831";
     public static final String techURL = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=cb9951ac79724fe7a06b2c30afb1d831";
+
+    //ad stuff....
+    private InterstitialAd interstitialAd;
+    public static final String INTERSTITIAL_ID = "ca-app-pub-5073642246912223/8824671181";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +153,32 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
+
+
+//      ad stuff here
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(INTERSTITIAL_ID);
+        interstitialAd.loadAd(new AdRequest.Builder().build());
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                Handler h = new Handler();
+                h.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        interstitialAd.loadAd(new AdRequest.Builder().build());
+                    }
+                }, 2*60*1000);
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                interstitialAd.show();
+            }
+        });
+
 
     }
 
@@ -301,6 +336,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
     }
+
 
 
 }

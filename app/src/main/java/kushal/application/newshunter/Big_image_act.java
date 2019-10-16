@@ -16,6 +16,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.r0adkll.slidr.Slidr;
 
 public class Big_image_act extends AppCompatActivity {
@@ -29,6 +32,15 @@ public class Big_image_act extends AppCompatActivity {
         Slidr.attach(this);
 
         getIncomingIntent();
+
+
+//      ad stuff......
+        AdView adView;
+
+        MobileAds.initialize(this, getResources().getString(R.string.BANNER_ID));
+        adView = findViewById(R.id.adView2);
+        adView.loadAd(new AdRequest.Builder().build());
+
     }
 
     @SuppressLint("SetTextI18n")

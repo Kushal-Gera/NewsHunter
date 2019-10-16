@@ -35,4 +35,7 @@
     <string name="enter_otp">Enter OTP</string>
     <string name="or">OR</string>
     <string name="bookmarks">bookmarks</string>
+
+    <string name="app_ID">ca-app-pub-5073642246912223~4760700455</string>
+    <string name="BANNER_ID">ca-app-pub-5073642246912223/6350551083</string>
 </resources>
