@@ -7,8 +7,8 @@ android {
         applicationId "kushal.application.newshunter"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 12
-        versionName "3.3"
+        versionCode 14
+        versionName "3.5.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

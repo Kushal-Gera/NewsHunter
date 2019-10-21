@@ -5,6 +5,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,6 +36,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -213,10 +215,20 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, "News Data or Internet\n May Not be Available", Toast.LENGTH_LONG).show();
+//                Toast.makeText(MainActivity.this, "Internet May Not be Available", Toast.LENGTH_LONG).show();
                 atHome = true;
                 loading_anim.setVisibility(View.GONE);
                 network.setVisibility(View.VISIBLE);
+                Snackbar.make(network, "Internet May Not be Available", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Retry", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(MainActivity.this, MainActivity.class));
+                                finish();
+                            }
+                        })
+                        .setActionTextColor(getResources().getColor(R.color.colorPrimaryDark))
+                        .show();
             }
         });
 

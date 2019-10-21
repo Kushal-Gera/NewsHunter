@@ -78,7 +78,7 @@ public class SavedNotesAct extends AppCompatActivity {
 
         if (ref.getKey() == null) {
             pd.dismiss();
-            Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "nothing there", Toast.LENGTH_SHORT).show();
             return;
         }
 
