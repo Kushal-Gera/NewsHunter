@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="kushal.application.newshunter">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_round"
@@ -16,7 +19,6 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/app_ID"/>
 
-        <activity android:name=".PhoneLoginAct"></activity>
         <activity android:name=".ForgotAct" />
         <activity
             android:name=".SplashScreen"
@@ -34,6 +36,8 @@
             android:name=".Bookmark"
             android:theme="@style/AppTheme.transparent" />
         <activity
+            android:name=".PhoneLoginAct"/>
+        <activity
             android:name=".BIg_note_act"
             android:theme="@style/AppTheme.transparent" />
         <activity
@@ -42,7 +46,6 @@
         <activity
             android:name=".NotesAct"
             android:theme="@style/AppTheme.transparent" />
-        <activity android:name=".LoginActivity" />
         <activity
             android:name=".Big_image_act"
             android:theme="@style/AppTheme.transparent" />
@@ -54,8 +57,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

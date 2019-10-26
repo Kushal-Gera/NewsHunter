@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,7 +32,7 @@ public class PhoneLoginAct extends AppCompatActivity {
 
     FirebaseAuth auth;
 
-    EditText phone, otp;
+    TextInputLayout phone, otp;
     Button login, getCode;
     ProgressBar progressBar;
 
@@ -42,19 +43,23 @@ public class PhoneLoginAct extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+        if (auth.getCurrentUser() != null){
+            startActivity(new Intent(this, MainActivity.class));
+        }
+
         phone = findViewById(R.id.phone);
         otp = findViewById(R.id.otp);
         getCode = findViewById(R.id.getCode);
         login = findViewById(R.id.login_btn);
         login.setVisibility(View.INVISIBLE);
 
-        progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar3);
         progressBar.setVisibility(View.INVISIBLE);
 
         getCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String number = phone.getText().toString().trim();
+                String number = phone.getEditText().getText().toString().trim();
                 if (!TextUtils.isEmpty(number) && number.length() > 9) {
 
                     getVerificationCode('+' + "91" + number);
@@ -62,7 +67,8 @@ public class PhoneLoginAct extends AppCompatActivity {
                     progressBar.setVisibility(View.VISIBLE);
                     login.setVisibility(View.VISIBLE);
                     getCode.setVisibility(View.INVISIBLE);
-                } else {
+                }
+                else {
                     phone.setError("Phone Number Required");
                     phone.requestFocus();
                 }
@@ -81,7 +87,7 @@ public class PhoneLoginAct extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userCode = otp.getText().toString().trim();
+                String userCode = otp.getEditText().getText().toString().trim();
                 if (!TextUtils.isEmpty(userCode))
                     verifyCode(userCode);
             }
@@ -97,6 +103,7 @@ public class PhoneLoginAct extends AppCompatActivity {
     }
 
     private void signInWith(PhoneAuthCredential credential) {
+        Toast.makeText(this, "Just There...", Toast.LENGTH_SHORT).show();
 
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -122,12 +129,13 @@ public class PhoneLoginAct extends AppCompatActivity {
 
     }
 
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
+            new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(PhoneAuthCredential credential) {
             String userCode = credential.getSmsCode();
             if (userCode != null) {
-                otp.setText(userCode);
+                otp.getEditText().setText(userCode);
                 verifyCode(userCode);
             }
 

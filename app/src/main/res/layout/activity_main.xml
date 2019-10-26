@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             app:lottie_rawRes="@raw/newly"
-            android:padding="80dp"
+            android:padding="100dp"
             app:lottie_loop="true"
             app:lottie_autoPlay="true"
             tools:ignore="RtlSymmetry" />

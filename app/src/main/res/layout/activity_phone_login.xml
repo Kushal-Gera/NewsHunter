@@ -1,141 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splash_bg"
-    android:orientation="vertical"
+    android:elevation="0dp"
     tools:context=".PhoneLoginAct">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/description"
+        android:elevation="0dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/spalsh_logo" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp">
-
-        <ImageView
-            android:contentDescription="@string/image_description"
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/spalsh_logo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_below="@+id/image_view"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/bg_nav_btn"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="50dp">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/ll1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:padding="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/bg_nav_btn"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView">
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_marginTop="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="30dp"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/image_description"
-                    android:src="@drawable/phone" />
-
-                <EditText
-                    android:id="@+id/phone"
-                    android:paddingStart="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_phone_number"
-                    android:inputType="phone"
-                    android:textColor="@color/colorBlack"
-                    android:textColorHint="#666"
-                    android:textSize="18sp"
-                    android:importantForAutofill="no"
-                    tools:ignore="RtlSymmetry" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_marginTop="40dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="40dp"
-                android:layout_marginEnd="30dp"
-                android:layout_height="wrap_content">
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/image_description"
-                android:src="@drawable/password" />
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/description"
+                android:src="@drawable/call" />
 
-            <EditText
-                android:id="@+id/otp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:hint="@string/enter_otp"
-                android:inputType="number"
-                android:textColor="@color/colorBlack"
-                android:textColorHint="#666"
-                android:textSize="18sp"
+                android:layout_height="60dp"
+                android:textColorHint="@color/hint_color"
+                app:boxBackgroundMode="outline"
+                app:boxCollapsedPaddingTop="2dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
                 android:importantForAutofill="no"
-                tools:ignore="RtlSymmetry" />
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hapticFeedbackEnabled="true"
+                    android:hint="Enter Phone Number"
+                    android:inputType="phone"
+                    android:paddingStart="15dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:textSize="20dp"
+                    tools:ignore="RtlSymmetry,SpUsage" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
-        </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/progressBar"
+        <LinearLayout
+            android:id="@+id/ll2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:indeterminateTint="#FFEBEE"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            android:layout_marginEnd="30dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            tools:ignore="NotSibling">
 
-        <Button
-            android:id="@+id/login_btn"
-            android:layout_width="140dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_nav_btn"
-            android:text="@string/login"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/description"
+                android:src="@drawable/otp" />
 
-        <Button
-            android:id="@+id/getCode"
-            android:layout_width="140dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_nav_btn"
-            android:text="@string/get_code"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/otp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="@string/enter_otp"
+                android:inputType="number"
+                android:textColorHint="@color/hint_color"
+                app:boxBackgroundMode="outline"
+                app:boxCollapsedPaddingTop="2dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hapticFeedbackEnabled="true"
+                    android:inputType="number"
+                    android:paddingStart="15dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:textSize="20dp"
+                    tools:ignore="RtlSymmetry,SpUsage" />
 
-</androidx.core.widget.NestedScrollView>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout5"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:indeterminateTint="@color/white"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/progressBar3"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/simple_bg"
+        android:gravity="center"
+        android:text="@string/login"
+        android:elevation="0dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/getCode"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:elevation="0dp"
+        android:layout_below="@+id/progressBar3"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/simple_bg"
+        android:text="get Code"
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp" />
+
+</RelativeLayout>
+

@@ -332,7 +332,7 @@ public class MainActivity extends AppCompatActivity {
                         firebaseAuth.signOut();
                         Toast.makeText(MainActivity.this, "Signing Out...", Toast.LENGTH_SHORT).show();
                         finish();
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        startActivity(new Intent(MainActivity.this, PhoneLoginAct.class));
 
                     }
                 })
