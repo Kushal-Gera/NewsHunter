@@ -7,8 +7,8 @@ android {
         applicationId "kushal.application.newshunter"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 15
-        versionName "4.0"
+        versionCode 20
+        versionName "6.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -44,5 +44,7 @@ dependencies {
 
     implementation 'com.airbnb.android:lottie:3.0.7'
     implementation 'com.google.android.gms:play-services-ads:18.2.0'
+
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
 
 }

@@ -74,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="6dp"
-                        android:contentDescription="date icon"
+                        android:contentDescription="@string/description"
                         android:src="@drawable/ic_today_black_24dp" />
 
                     <TextView

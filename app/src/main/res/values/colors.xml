@@ -8,6 +8,8 @@
     <color name="linkColor">#1A1A6E</color>
     <color name="colorBlack">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="hint_color">#333</color>
+    <color name="sec_color">#444</color>
+
+    <color name="background_btns">#FFEBEE</color>
 
 </resources>

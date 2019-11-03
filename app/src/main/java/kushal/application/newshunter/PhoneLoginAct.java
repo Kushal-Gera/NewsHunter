@@ -1,20 +1,21 @@
 package kushal.application.newshunter;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
 import com.google.android.material.textfield.TextInputLayout;
@@ -40,11 +41,15 @@ public class PhoneLoginAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_login);
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         auth = FirebaseAuth.getInstance();
 
-        if (auth.getCurrentUser() != null){
+        if (auth.getCurrentUser() != null) {
             startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
 
         phone = findViewById(R.id.phone);
@@ -67,19 +72,18 @@ public class PhoneLoginAct extends AppCompatActivity {
                     progressBar.setVisibility(View.VISIBLE);
                     login.setVisibility(View.VISIBLE);
                     getCode.setVisibility(View.INVISIBLE);
-                }
-                else {
+                } else {
                     phone.setError("Phone Number Required");
                     phone.requestFocus();
                 }
 
-//      even I don't how this coding is working, I just pasted it :)
+//              even I don't how this coding is working, I just pasted it :p
                 View view = getCurrentFocus();
                 if (view != null) {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
-//      but I am sure that after this 'keyboard is gone'
+//              but I am sure that after this 'keyboard is gone'
 
             }
         });
@@ -97,13 +101,17 @@ public class PhoneLoginAct extends AppCompatActivity {
     }
 
     private void verifyCode(String userCode) {
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(VERIFICATION_ID, userCode);
-        signInWith(credential);
+        try {
+            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(VERIFICATION_ID, userCode);
+            signInWith(credential);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
     private void signInWith(PhoneAuthCredential credential) {
-        Toast.makeText(this, "Just There...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Hold on, Just There...", Toast.LENGTH_SHORT).show();
 
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -112,50 +120,49 @@ public class PhoneLoginAct extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             startActivity(new Intent(PhoneLoginAct.this, MainActivity.class));
                             finish();
-                        } else
-                            Toast.makeText(PhoneLoginAct.this, "ERROR OCCURRED", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(PhoneLoginAct.this, "ERROR OCCURRED", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
     private void getVerificationCode(String phoneNumber) {
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber,
-                60,
+                120,
                 TimeUnit.SECONDS,
                 TaskExecutors.MAIN_THREAD,
                 mCallbacks);
-
     }
 
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-        @Override
-        public void onVerificationCompleted(PhoneAuthCredential credential) {
-            String userCode = credential.getSmsCode();
-            if (userCode != null) {
-                otp.getEditText().setText(userCode);
-                verifyCode(userCode);
-            }
+                @Override
+                public void onVerificationCompleted(PhoneAuthCredential credential) {
+                    String userCode = credential.getSmsCode();
+                    if (userCode != null) {
+                        otp.getEditText().setText(userCode);
+                        verifyCode(userCode);
+                    }
+                }
 
-        }
+                @Override
+                public void onVerificationFailed(FirebaseException e) {
+                    Toast.makeText(PhoneLoginAct.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
 
-        @Override
-        public void onVerificationFailed(FirebaseException e) {
-            Toast.makeText(PhoneLoginAct.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
+                @Override
+                public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                    super.onCodeSent(s, forceResendingToken);
 
-        @Override
-        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
-
-            VERIFICATION_ID = s;
-
-        }
-
-
-    };
+                    VERIFICATION_ID = s;
+                }
+            };
 
 
 }

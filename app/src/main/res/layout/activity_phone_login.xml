@@ -15,12 +15,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/description"
         android:elevation="0dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
         android:paddingStart="30dp"
+        android:paddingTop="20dp"
         android:paddingEnd="30dp"
+        android:paddingBottom="20dp"
         android:scaleType="centerCrop"
         android:src="@drawable/spalsh_logo" />
 
@@ -59,14 +60,14 @@
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:textColorHint="@color/hint_color"
+                android:importantForAutofill="no"
+                android:textColorHint="@color/sec_color"
                 app:boxBackgroundMode="outline"
                 app:boxCollapsedPaddingTop="2dp"
-                app:boxCornerRadiusBottomEnd="15dp"
-                app:boxCornerRadiusBottomStart="15dp"
-                android:importantForAutofill="no"
-                app:boxCornerRadiusTopEnd="15dp"
-                app:boxCornerRadiusTopStart="15dp">
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -109,13 +110,13 @@
                 android:layout_height="60dp"
                 android:hint="@string/enter_otp"
                 android:inputType="number"
-                android:textColorHint="@color/hint_color"
+                android:textColorHint="@color/sec_color"
                 app:boxBackgroundMode="outline"
                 app:boxCollapsedPaddingTop="2dp"
-                app:boxCornerRadiusBottomEnd="15dp"
-                app:boxCornerRadiusBottomStart="15dp"
-                app:boxCornerRadiusTopEnd="15dp"
-                app:boxCornerRadiusTopStart="15dp">
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -156,9 +157,9 @@
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/simple_bg"
+        android:elevation="0dp"
         android:gravity="center"
         android:text="@string/login"
-        android:elevation="0dp"
         android:textColor="@color/colorBlack"
         android:textSize="20sp" />
 
@@ -166,13 +167,13 @@
         android:id="@+id/getCode"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:elevation="0dp"
         android:layout_below="@+id/progressBar3"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/simple_bg"
+        android:elevation="0dp"
         android:text="get Code"
         android:textColor="@color/colorBlack"
         android:textSize="20sp" />

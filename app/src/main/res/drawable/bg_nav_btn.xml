@@ -6,7 +6,7 @@
     </corners>
 
     <solid
-        android:color="#FFEBEE">
+        android:color="@color/background_btns">
     </solid>
 
     <stroke
