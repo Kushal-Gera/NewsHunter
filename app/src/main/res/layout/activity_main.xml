@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E0E0E0"
-    android:keepScreenOn="true"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:keepScreenOn="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,19 +18,19 @@
             android:id="@+id/toolBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"/>
+            android:background="@color/colorPrimary" />
 
-<!--        no data animation-->
+        <!--        no data animation-->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/network"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            app:lottie_rawRes="@raw/newly"
             android:padding="100dp"
-            app:lottie_loop="true"
+            android:visibility="gone"
             app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/newly"
             tools:ignore="RtlSymmetry" />
 
         <com.airbnb.lottie.LottieAnimationView
@@ -38,9 +38,9 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            app:lottie_rawRes="@raw/loading"
+            app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_autoPlay="true" />
+            app:lottie_rawRes="@raw/loading" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -63,8 +63,8 @@
             android:id="@+id/nav_tv"
             android:layout_width="241dp"
             android:layout_height="?actionBarSize"
-            android:gravity="center"
             android:background="@drawable/drawer_tv"
+            android:gravity="center"
             android:text="@string/home_news"
             android:textColor="@color/colorBlack"
             android:textSize="25sp" />
@@ -106,14 +106,14 @@
             android:text="@string/tech_news" />
 
         <TextView
-            android:text="@string/make_a_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:gravity="start"
             android:layout_marginStart="35dp"
+            android:layout_marginTop="22dp"
+            android:gravity="start"
+            android:text="@string/make_a_note"
             android:textColor="@color/colorBlack"
-            android:layout_marginTop="22dp"/>
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="match_parent"

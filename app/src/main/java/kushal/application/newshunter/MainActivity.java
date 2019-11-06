@@ -26,8 +26,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,6 +37,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String NOTIFICATION = "Notify";
     public static final String GENERAL = "general";
+
+    boolean target = false, allowed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,9 +200,9 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
             NotificationChannel channel = new NotificationChannel(
-                                                            NOTIFICATION,
-                                                            NOTIFICATION,
-                                                            NotificationManager.IMPORTANCE_DEFAULT);
+                    NOTIFICATION,
+                    NOTIFICATION,
+                    NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
@@ -218,6 +220,31 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+        //first guide
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (target) {
+                    new TapTargetSequence(MainActivity.this)
+                            .targets(
+                                    TapTarget.forToolbarMenuItem(toolbar, R.id.app_bar_search, "Search for News\nby Title, Tag or Publisher")
+                                            .cancelable(true)
+                                            .outerCircleColor(R.color.colorPrimary)
+                                            .outerCircleAlpha(0.6f)
+                                            .targetCircleColor(R.color.white)
+                                            .targetRadius(30)
+                                            .dimColor(R.color.colorBlack),
+                                    TapTarget.forToolbarMenuItem(toolbar, R.id.bookmarks, "Click Here\nto Save Bookmarks")
+                                            .cancelable(true)
+                                            .outerCircleColor(R.color.colorPrimary)
+                                            .outerCircleAlpha(0.6f)
+                                            .targetCircleColor(R.color.white)
+                                            .targetRadius(30)
+                                            .dimColor(R.color.colorBlack)
+                            ).start();
+                }
+            }
+        }, 1500);
 
     }
 
@@ -229,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
     }
 
     public String generateURL(String baseUrl, String searchCriteria) {
@@ -283,6 +311,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        target = true;
         getMenuInflater().inflate(R.menu.main_menu, menu);
 
         final SearchView searchView = (SearchView) menu.findItem(R.id.app_bar_search).getActionView();

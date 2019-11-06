@@ -1,6 +1,7 @@
 package kushal.application.newshunter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -32,11 +35,13 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
     private DatabaseReference myRef;
 
     private Context myContext;
+    private Activity myAct;
     private User data;
     private Boolean flag = false;
 
     My_adapter(Context context, User data) {
         myContext = context;
+        myAct = (Activity) context;
         this.data = data;
         if (data.getTotalResults() <= 1) flag = true;
     }
@@ -71,7 +76,34 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
             holder.date.setText(getDate(model.getPublishedAt()));
             Glide.with(myContext).load(model.getUrlToImage()).placeholder(R.drawable.placeholder).centerCrop().into(holder.img);
 
+//            if (position == 0) {
+//                new TapTargetSequence(myAct)
+//                        .targets(
+//                                TapTarget.forView(holder.share, "Click Here\nto Share News")
+//                                        .cancelable(true)
+//                                        .outerCircleColor(R.color.colorPrimary)
+//                                        .outerCircleAlpha(0.6f)
+//                                        .targetCircleColor(R.color.white)
+//                                        .targetRadius(30)
+//                                        .tintTarget(true)
+//                                        .transparentTarget(true)
+//                                        .dimColor(R.color.colorBlack),
+//                                TapTarget.forView(holder.animationView, "Save BookMarks !")
+//                                        .cancelable(true)
+//                                        .outerCircleColor(R.color.colorPrimary)
+//                                        .outerCircleAlpha(0.6f)
+//                                        .targetCircleColor(R.color.white)
+//                                        .targetRadius(30)
+//                                        .tintTarget(true)
+//                                        .transparentTarget(true)
+//                                        .dimColor(R.color.colorBlack)
+//                        ).start();
+//
+//
+//            }
+
             //set On click listeners
+
             holder.UnSaveStar.setVisibility(View.GONE);
             holder.animationView.setOnClickListener(new View.OnClickListener() {
                 @Override

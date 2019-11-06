@@ -40,11 +40,12 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.r0adkll:slidableactivity:2.1.0'
+    implementation 'com.google.android.gms:play-services-ads:18.2.0'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
 
     implementation 'com.airbnb.android:lottie:3.0.7'
-    implementation 'com.google.android.gms:play-services-ads:18.2.0'
+    implementation 'com.r0adkll:slidableactivity:2.1.0'
+    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
 
-    implementation 'com.google.firebase:firebase-messaging:20.0.0'
 
 }
