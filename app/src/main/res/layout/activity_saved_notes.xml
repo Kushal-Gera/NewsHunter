@@ -5,51 +5,43 @@
     android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CECECE"
+    android:background="#EFEFEF"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="40dp"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:text="@string/show_notes"
         android:textColor="@color/colorBlack"
-        android:textSize="40sp"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/note_recView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:paddingBottom="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        tools:context="kushal.application.newshunter.SavedNotesAct">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/note_recView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:context="kushal.application.newshunter.SavedNotesAct">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-    </ScrollView>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:adSize="BANNER"
-        app:adUnitId="@string/BANNER_ID"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
+        app:adSize="BANNER"
+        app:adUnitId="@string/BANNER_ID"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

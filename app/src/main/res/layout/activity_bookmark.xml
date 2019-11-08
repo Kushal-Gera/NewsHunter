@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cdcdcd"
+    android:background="#EFEFEF"
     tools:context="kushal.application.newshunter.Bookmark">
 
     <androidx.appcompat.widget.Toolbar

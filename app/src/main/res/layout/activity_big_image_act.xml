@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f0f0f0"
-    android:keepScreenOn="true"
-    android:padding="4dp">
+    android:background="#F5f5f5"
+    android:keepScreenOn="true">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -48,9 +47,9 @@
                     android:layout_height="400dp"
                     android:layout_marginTop="8dp"
                     android:adjustViewBounds="true"
+                    android:contentDescription="@string/image_description"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/placeholder"
-                    android:contentDescription="@string/image_description" />
+                    android:src="@drawable/placeholder" />
 
                 <ImageView
                     android:id="@+id/share2"
@@ -84,8 +83,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:adSize="BANNER"
                 android:layout_marginTop="5dp"
+                app:adSize="BANNER"
                 app:adUnitId="@string/BANNER_ID"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -106,12 +105,13 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/btn_bg"
+                android:background="@android:color/transparent"
+                android:elevation="0dp"
                 android:text="@string/btn_txt"
                 android:textAllCaps="false"
-                android:textColor="@color/colorBlack"
-                android:textSize="16sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="italic" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -123,7 +123,7 @@
                 android:id="@+id/webView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="16dp" />
 
         </LinearLayout>
     </ScrollView>

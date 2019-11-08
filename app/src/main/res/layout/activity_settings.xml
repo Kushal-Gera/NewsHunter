@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ddd"
+    android:background="#EFEFEF"
     android:keepScreenOn="true"
     tools:context="kushal.application.newshunter.SettingsAct">
 
@@ -95,7 +95,7 @@
                 android:padding="15dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/dev"
+                app:lottie_rawRes="@raw/new_dev"
                 tools:ignore="RtlSymmetry" />
 
             <TextView

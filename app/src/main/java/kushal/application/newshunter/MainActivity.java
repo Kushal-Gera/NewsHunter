@@ -7,6 +7,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     public long time = 0;
     private boolean searchUsed = false;
     private boolean atHome = true;
+    private RequestQueue que = null;
     public static final String api = "cb9951ac79724fe7a06b2c30afb1d831";
     public static final String siteURL = "https://newsapi.org/v2/everything";
     public static final String homeURL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=cb9951ac79724fe7a06b2c30afb1d831";
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String NOTIFICATION = "Notify";
     public static final String GENERAL = "general";
 
-    boolean target = false, allowed = false;
+    boolean target = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,7 +200,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Notification stuff starts here
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
             NotificationChannel channel = new NotificationChannel(
                     NOTIFICATION,
                     NOTIFICATION,
@@ -220,31 +221,52 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+
         //first guide
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (target) {
-                    new TapTargetSequence(MainActivity.this)
-                            .targets(
-                                    TapTarget.forToolbarMenuItem(toolbar, R.id.app_bar_search, "Search for News\nby Title, Tag or Publisher")
-                                            .cancelable(true)
-                                            .outerCircleColor(R.color.colorPrimary)
-                                            .outerCircleAlpha(0.6f)
-                                            .targetCircleColor(R.color.white)
-                                            .targetRadius(30)
-                                            .dimColor(R.color.colorBlack),
-                                    TapTarget.forToolbarMenuItem(toolbar, R.id.bookmarks, "Click Here\nto Save Bookmarks")
-                                            .cancelable(true)
-                                            .outerCircleColor(R.color.colorPrimary)
-                                            .outerCircleAlpha(0.6f)
-                                            .targetCircleColor(R.color.white)
-                                            .targetRadius(30)
-                                            .dimColor(R.color.colorBlack)
-                            ).start();
+        final SharedPreferences pref = getSharedPreferences("shared_pref", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = pref.edit();
+
+        if (pref.getBoolean("IS_FIRST", true)) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (target) {
+                        new TapTargetSequence(MainActivity.this)
+                                .targets(
+                                        TapTarget.forToolbarMenuItem(toolbar, R.id.app_bar_search, "Search for News\nby Title, Tag or Publisher")
+                                                .cancelable(true)
+                                                .outerCircleColor(R.color.colorPrimary)
+                                                .outerCircleAlpha(0.6f)
+                                                .targetCircleColor(R.color.white)
+                                                .targetRadius(30)
+                                                .dimColor(R.color.colorBlack),
+                                        TapTarget.forToolbarMenuItem(toolbar, R.id.bookmarks, "Click Here\nto Save Bookmarks")
+                                                .cancelable(true)
+                                                .outerCircleColor(R.color.colorPrimary)
+                                                .outerCircleAlpha(0.6f)
+                                                .targetCircleColor(R.color.white)
+                                                .targetRadius(30)
+                                                .dimColor(R.color.colorBlack)
+                                ).listener(new TapTargetSequence.Listener() {
+                            @Override
+                            public void onSequenceFinish() {
+                                editor.putBoolean("IS_FIRST", false).apply();
+                            }
+
+                            @Override
+                            public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+
+                            }
+
+                            @Override
+                            public void onSequenceCanceled(TapTarget lastTarget) {
+
+                            }
+                        }).start();
+                    }
                 }
-            }
-        }, 1500);
+            }, 1500);
+        }
 
     }
 
@@ -297,7 +319,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        RequestQueue que = Volley.newRequestQueue(this);
+        if (que == null)
+            que = Volley.newRequestQueue(this);
         que.add(request);
 
 //      even I don't how this coding is working, I just pasted it :)

@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EFEFEF"
     android:isScrollContainer="true"
-    android:background="#FFF"
     tools:context="kushal.application.newshunter.NotesAct">
 
     <ScrollView
-        android:overScrollMode="never"
-        android:isScrollContainer="true"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:isScrollContainer="true"
+        android:overScrollMode="never"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="wrap_content">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,8 +24,8 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="#FFEBEE"
+                android:layout_height="40dp"
+                android:background="@color/colorPrimaryDark"
                 android:gravity="center"
                 android:text="@string/edit_note"
                 android:textColor="@color/colorBlack"
@@ -52,10 +52,11 @@
                 android:layout_marginEnd="16dp"
                 android:focusable="auto"
                 android:hint="Enter Title Here (required)"
+                android:importantForAutofill="no"
                 android:textColor="@color/colorBlack"
+                android:textColorHint="#555"
                 android:textSize="22sp"
-                tools:ignore="HardcodedText"
-                android:importantForAutofill="no" />
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -81,9 +82,10 @@
                     android:layout_marginEnd="16dp"
                     android:focusable="auto"
                     android:hint="Enter Text Briefly (optional)"
+                    android:importantForAutofill="no"
+                    android:textColorHint="#555"
                     android:textSize="18sp"
-                    tools:ignore="HardcodedText"
-                    android:importantForAutofill="no" />
+                    tools:ignore="HardcodedText" />
 
             </androidx.core.widget.NestedScrollView>
 
@@ -131,8 +133,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:adSize="BANNER"
         android:layout_marginTop="5dp"
+        app:adSize="BANNER"
         app:adUnitId="@string/BANNER_ID"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

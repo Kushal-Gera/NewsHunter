@@ -22,9 +22,8 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/app_ID"/>
+            android:value="@string/app_ID" />
 
-        <activity android:name=".ForgotAct" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/AppTheme.Splash">
@@ -40,8 +39,7 @@
         <activity
             android:name=".Bookmark"
             android:theme="@style/AppTheme.transparent" />
-        <activity
-            android:name=".PhoneLoginAct"/>
+        <activity android:name=".PhoneLoginAct" />
         <activity
             android:name=".BIg_note_act"
             android:theme="@style/AppTheme.transparent" />
@@ -64,10 +62,10 @@
 
         <service
             android:name=".MyMessagingService"
-            android:permission="com.google.android.c2dm.permission.SEND"
-            android:exported="true">
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>

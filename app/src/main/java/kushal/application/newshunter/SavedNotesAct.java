@@ -35,6 +35,7 @@ public class SavedNotesAct extends AppCompatActivity {
     public static final String NOTE = "note";
     public static final String TITLE = "title";
     private static final String TAG = "SavedNotesAct";
+
     ProgressDialog pd;
     RecyclerView note_recView;
     DatabaseReference ref;
@@ -145,6 +146,7 @@ public class SavedNotesAct extends AppCompatActivity {
         adapter.startListening();
         note_recView.setAdapter(adapter);
 
+        Snackbar.make(content, "Tap Any Note to Edit", Snackbar.LENGTH_LONG).show();
 
     }
 

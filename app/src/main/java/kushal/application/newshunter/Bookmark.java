@@ -99,6 +99,7 @@ public class Bookmark extends AppCompatActivity {
                         holder.cross.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                holder.itemView.setVisibility(View.GONE);
                                 my_ref.child(node_id).removeValue();
                             }
                         });
