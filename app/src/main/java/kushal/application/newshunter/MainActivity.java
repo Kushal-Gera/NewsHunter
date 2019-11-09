@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
                                                 .targetCircleColor(R.color.white)
                                                 .targetRadius(30)
                                                 .dimColor(R.color.colorBlack),
-                                        TapTarget.forToolbarMenuItem(toolbar, R.id.bookmarks, "Click Here\nto Save Bookmarks")
+                                        TapTarget.forToolbarMenuItem(toolbar, R.id.bookmarks, "Tap to See\nSaved Bookmarks")
                                                 .cancelable(true)
                                                 .outerCircleColor(R.color.colorPrimary)
                                                 .outerCircleAlpha(0.6f)
@@ -255,18 +255,17 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
-
                             }
 
                             @Override
                             public void onSequenceCanceled(TapTarget lastTarget) {
-
                             }
                         }).start();
                     }
                 }
             }, 1500);
         }
+
 
     }
 

@@ -62,6 +62,7 @@ public class SettingsAct extends AppCompatActivity {
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse("mailto:" + GMAIL_LINK));
                 i.putExtra(Intent.EXTRA_SUBJECT, "Suggestion for the App 'News Hunter'");
+                i.putExtra(Intent.EXTRA_TEXT, "I have a suggestion that:");
 
                 startActivity(i);
             }

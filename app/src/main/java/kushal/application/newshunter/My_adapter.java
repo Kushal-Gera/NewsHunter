@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.getkeepsafe.taptargetview.TapTarget;
-import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
     private static final String TAG = "My_adapter";
@@ -44,6 +45,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
         myAct = (Activity) context;
         this.data = data;
         if (data.getTotalResults() <= 1) flag = true;
+
     }
 
     @NonNull
@@ -64,6 +66,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
             holder.author.setVisibility(View.GONE);
             holder.dateView.setVisibility(View.GONE);
             holder.animationView.setVisibility(View.GONE);
+            holder.share.setVisibility(View.GONE);
             holder.UnSaveStar.setVisibility(View.GONE);
         } else {
             Article[] articles = data.getArticles();
@@ -136,6 +139,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
                     shareURL(model.getUrl());
                 }
             });
+
         }
 
     }
@@ -178,6 +182,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
         myRef.child(TITLE).setValue(title);
 
     }
+
 
 }
 

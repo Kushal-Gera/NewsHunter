@@ -29,8 +29,8 @@
             android:padding="100dp"
             android:visibility="gone"
             app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/newly"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/internet"
             tools:ignore="RtlSymmetry" />
 
         <com.airbnb.lottie.LottieAnimationView
