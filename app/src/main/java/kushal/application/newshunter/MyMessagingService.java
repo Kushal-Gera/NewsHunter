@@ -4,6 +4,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -26,7 +27,6 @@ public class MyMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String s) {
         super.onNewToken(s);
-
     }
 
     public void showNoti(String title, String text){
@@ -37,11 +37,17 @@ public class MyMessagingService extends FirebaseMessagingService {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NOTIFICATION)
                 .setContentTitle(title)
-                .setSmallIcon(R.drawable.logo)
                 .setAutoCancel(true)
                 .setLargeIcon(bitmap)
                 .setContentIntent(pendingIntent)
                 .setContentText(text);
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder.setSmallIcon(R.drawable.logo);
+            builder.setColor(getResources().getColor(R.color.colorPrimary));
+        } else {
+            builder.setSmallIcon(R.drawable.logo);
+        }
 
         NotificationManagerCompat manager = NotificationManagerCompat.from(this);
         manager.notify((int) System.currentTimeMillis(), builder.build());

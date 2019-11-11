@@ -18,15 +18,15 @@ import com.google.android.material.snackbar.Snackbar;
 import com.r0adkll.slidr.Slidr;
 
 public class SettingsAct extends AppCompatActivity {
+    private static final String TAG = "SettingsAct";
+
     public static final String GMAIL_LINK = "kushalgera1212@gmail.com";
     public static final String GITHUB_LINK = "https://github.com/Kushal-Gera";
     public static final String API_LINK = "https://newsapi.org/";
-    private static final String TAG = "SettingsAct";
-    public final String WEB_APP_LINK = "http://play.google.com/store/apps/details?id=" + "kushal.application.newshunter";
+    public final String WEB_APP_LINK = "http://play.google.com/store/apps/details?id=" + getPackageName();
 
     LinearLayout developer, suggest, share, rate;
     TextView api_link;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class SettingsAct extends AppCompatActivity {
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse("mailto:" + GMAIL_LINK));
                 i.putExtra(Intent.EXTRA_SUBJECT, "Suggestion for the App 'News Hunter'");
-                i.putExtra(Intent.EXTRA_TEXT, "I have a suggestion that:");
+                i.putExtra(Intent.EXTRA_TEXT, "I have a suggestion that: ");
 
                 startActivity(i);
             }
@@ -101,16 +101,15 @@ public class SettingsAct extends AppCompatActivity {
     }
 
     private void shareIT() {
-
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("text/plain");
-        i.putExtra(Intent.EXTRA_TEXT, WEB_APP_LINK);
+        i.putExtra(Intent.EXTRA_TEXT, "News Hunter\n\n" + WEB_APP_LINK);
 
         startActivity(Intent.createChooser(i, "Share Via"));
     }
 
     private void rateUs() {
-//        open playstore if present
+//        open playStore if present otherwise go to chrome
         try {
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("market://details?id=" + getPackageName())));
@@ -119,4 +118,5 @@ public class SettingsAct extends AppCompatActivity {
         }
 
     }
+
 }

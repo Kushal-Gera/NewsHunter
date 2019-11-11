@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
     private static final String TAG = "My_adapter";
@@ -79,34 +76,6 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
             holder.date.setText(getDate(model.getPublishedAt()));
             Glide.with(myContext).load(model.getUrlToImage()).placeholder(R.drawable.placeholder).centerCrop().into(holder.img);
 
-//            if (position == 0) {
-//                new TapTargetSequence(myAct)
-//                        .targets(
-//                                TapTarget.forView(holder.share, "Click Here\nto Share News")
-//                                        .cancelable(true)
-//                                        .outerCircleColor(R.color.colorPrimary)
-//                                        .outerCircleAlpha(0.6f)
-//                                        .targetCircleColor(R.color.white)
-//                                        .targetRadius(30)
-//                                        .tintTarget(true)
-//                                        .transparentTarget(true)
-//                                        .dimColor(R.color.colorBlack),
-//                                TapTarget.forView(holder.animationView, "Save BookMarks !")
-//                                        .cancelable(true)
-//                                        .outerCircleColor(R.color.colorPrimary)
-//                                        .outerCircleAlpha(0.6f)
-//                                        .targetCircleColor(R.color.white)
-//                                        .targetRadius(30)
-//                                        .tintTarget(true)
-//                                        .transparentTarget(true)
-//                                        .dimColor(R.color.colorBlack)
-//                        ).start();
-//
-//
-//            }
-
-            //set On click listeners
-
             holder.UnSaveStar.setVisibility(View.GONE);
             holder.animationView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -148,7 +117,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
 
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(Intent.EXTRA_TEXT, url);
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, "Read this :\n" + url + "\n\nShared via News Hunter");
         myContext.startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
     }

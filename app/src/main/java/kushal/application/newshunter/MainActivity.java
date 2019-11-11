@@ -31,6 +31,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.RequestQueue;
@@ -53,6 +55,8 @@ import com.google.gson.GsonBuilder;
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrInterface;
 
+import java.util.concurrent.TimeUnit;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     DrawerLayout drawerLayout;
@@ -60,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     LottieAnimationView loading_anim;
+    LinearLayout main;
 
     LinearLayout navBar;
     TextView nav_tv;
@@ -86,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String GENERAL = "general";
 
     boolean target = false;
+    boolean IN_SEQUENCE = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         network = findViewById(R.id.network);
         ////////////////////////////////////////////////////////////////////////////////////////////
 
+        main = findViewById(R.id.main);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         navBar = findViewById(R.id.navBar);
@@ -108,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
         loadData(homeURL);
         atHome = true;
         ////////////////////////////////////////////////////////////////////////////////////////////
-
         home = findViewById(R.id.home);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,7 +213,6 @@ public class MainActivity extends AppCompatActivity {
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
-
         FirebaseMessaging.getInstance().subscribeToTopic(GENERAL)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -217,7 +222,6 @@ public class MainActivity extends AppCompatActivity {
                             msg = "failed";
                         }
                         Log.d(TAG, msg);
-//                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -227,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
         final SharedPreferences.Editor editor = pref.edit();
 
         if (pref.getBoolean("IS_FIRST", true)) {
+            IN_SEQUENCE = true;
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -234,14 +239,14 @@ public class MainActivity extends AppCompatActivity {
                         new TapTargetSequence(MainActivity.this)
                                 .targets(
                                         TapTarget.forToolbarMenuItem(toolbar, R.id.app_bar_search, "Search for News\nby Title, Tag or Publisher")
-                                                .cancelable(true)
+                                                .cancelable(false)
                                                 .outerCircleColor(R.color.colorPrimary)
                                                 .outerCircleAlpha(0.6f)
                                                 .targetCircleColor(R.color.white)
                                                 .targetRadius(30)
                                                 .dimColor(R.color.colorBlack),
                                         TapTarget.forToolbarMenuItem(toolbar, R.id.bookmarks, "Tap to See\nSaved Bookmarks")
-                                                .cancelable(true)
+                                                .cancelable(false)
                                                 .outerCircleColor(R.color.colorPrimary)
                                                 .outerCircleAlpha(0.6f)
                                                 .targetCircleColor(R.color.white)
@@ -251,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onSequenceFinish() {
                                 editor.putBoolean("IS_FIRST", false).apply();
+                                IN_SEQUENCE = false;
                             }
 
                             @Override
@@ -265,6 +271,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }, 1500);
         }
+
+
+        PeriodicWorkRequest PWrequest = new PeriodicWorkRequest.Builder(
+                CheckPeriodic.class, 16, TimeUnit.MINUTES).
+                build();
+
+        WorkManager.getInstance(this).enqueue(PWrequest);
 
 
     }
@@ -384,29 +397,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
-
-        if (this.drawerLayout.isDrawerOpen(GravityCompat.START))
-            this.drawerLayout.closeDrawer(GravityCompat.START);
-
-        else if (searchUsed) {
-            loadData(homeURL);
-            nav_tv.setText(getString(R.string.home_news));
-            searchUsed = false;
-        } else if (!atHome) {
-            loadData(homeURL);
-            nav_tv.setText(getString(R.string.home_news));
-            atHome = true;
-        } else if (time + 2500 > System.currentTimeMillis()) {
-            super.onBackPressed();
-        } else {
-            Toast.makeText(this, "Press Back Again To Exit", Toast.LENGTH_SHORT).show();
-            time = System.currentTimeMillis();
-        }
-
-    }
-
     public void signOut() {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -434,6 +424,30 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (IN_SEQUENCE)
+            return;
+        if (this.drawerLayout.isDrawerOpen(GravityCompat.START))
+            this.drawerLayout.closeDrawer(GravityCompat.START);
+        else if (searchUsed) {
+            loadData(homeURL);
+            nav_tv.setText(getString(R.string.home_news));
+            searchUsed = false;
+        } else if (!atHome) {
+            loadData(homeURL);
+            nav_tv.setText(getString(R.string.home_news));
+            atHome = true;
+        } else if (time + 2500 > System.currentTimeMillis()) {
+            super.onBackPressed();
+        } else {
+            Toast.makeText(this, "Press Back Again To Exit", Toast.LENGTH_SHORT).show();
+            time = System.currentTimeMillis();
+        }
 
     }
 
