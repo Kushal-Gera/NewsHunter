@@ -274,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         PeriodicWorkRequest PWrequest = new PeriodicWorkRequest.Builder(
-                CheckPeriodic.class, 16, TimeUnit.MINUTES).
+                CheckPeriodic.class, 15, TimeUnit.MINUTES, 5, TimeUnit.MINUTES).
                 build();
 
         WorkManager.getInstance(this).enqueue(PWrequest);
@@ -307,9 +307,10 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 GsonBuilder builder = new GsonBuilder();
                 Gson gson = builder.create();
-                User users = gson.fromJson(response, User.class);
+                final User users = gson.fromJson(response, User.class);
                 recyclerView.setAdapter(new My_adapter(MainActivity.this, users));
                 loading_anim.setVisibility(View.GONE);
+
             }
         }, new Response.ErrorListener() {
             @Override

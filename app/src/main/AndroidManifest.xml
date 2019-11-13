@@ -24,7 +24,8 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/app_ID" />
 
-        <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/logo" />
 
         <activity

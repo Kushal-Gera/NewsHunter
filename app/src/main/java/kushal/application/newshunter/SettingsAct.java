@@ -23,7 +23,7 @@ public class SettingsAct extends AppCompatActivity {
     public static final String GMAIL_LINK = "kushalgera1212@gmail.com";
     public static final String GITHUB_LINK = "https://github.com/Kushal-Gera";
     public static final String API_LINK = "https://newsapi.org/";
-    public final String WEB_APP_LINK = "http://play.google.com/store/apps/details?id=" + getPackageName();
+    public final String WEB_APP_LINK = "http://play.google.com/store/apps/details?id=" + "kushal.application.newshunter";
 
     LinearLayout developer, suggest, share, rate;
     TextView api_link;
