@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
 
@@ -103,21 +104,22 @@ public class CheckPeriodic extends Worker {
                         .setAutoCancel(true)
                         .setContentIntent(pi)
                         .setLargeIcon(bitmapLogo)
-                        .setSmallIcon(R.drawable.logo);
+                        .setColor(Color.WHITE)
+                        .setSmallIcon(R.drawable.news);
 
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            Bitmap bitmap = Picasso.get().load(art[0].getUrlToImage()).get();
+                            Bitmap bitmap = Picasso.get().load(art[0].getUrlToImage())
+                                    .placeholder(R.drawable.banner).get();
                             builder.setLargeIcon(bitmap)
                                     .setStyle(new NotificationCompat.BigPictureStyle()
                                             .bigPicture(bitmap)
                                             .bigLargeIcon(bitmapLogo)
                                     );
                             manager.notify(20, builder.build());
-                        }
-                        catch (IOException e) {
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }

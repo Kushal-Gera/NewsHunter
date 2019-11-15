@@ -8,6 +8,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +30,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -82,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String businessURL = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=cb9951ac79724fe7a06b2c30afb1d831";
     public static final String wsjURL = "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=cb9951ac79724fe7a06b2c30afb1d831";
     public static final String techURL = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=cb9951ac79724fe7a06b2c30afb1d831";
+    public static final String SHARED_PREF = "shared_pref";
 
     //ad stuff....
     private InterstitialAd interstitialAd;
@@ -92,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     boolean target = false;
     boolean IN_SEQUENCE = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -227,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //first guide
-        final SharedPreferences pref = getSharedPreferences("shared_pref", MODE_PRIVATE);
+        final SharedPreferences pref = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
         final SharedPreferences.Editor editor = pref.edit();
 
         if (pref.getBoolean("IS_FIRST", true)) {
@@ -255,6 +261,33 @@ public class MainActivity extends AppCompatActivity {
                                 ).listener(new TapTargetSequence.Listener() {
                             @Override
                             public void onSequenceFinish() {
+                                // first notification stuff
+                                final NotificationManager manager = (NotificationManager)
+                                        getSystemService(Context.NOTIFICATION_SERVICE);
+
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                    manager.createNotificationChannel(new NotificationChannel(
+                                            "channel", "New News", NotificationManager.IMPORTANCE_DEFAULT
+                                    ));
+                                }
+
+                                final Bitmap bitmapLogo = BitmapFactory.decodeResource(
+                                        getResources(), R.drawable.logo);
+
+                                final NotificationCompat.Builder mbuilder = new NotificationCompat.Builder(MainActivity.this, "channel")
+                                        .setContentTitle("Welcome to News Hunter Family.")
+                                        .setContentText("We'll Keep You Updated at Every Instance.")
+                                        .setAutoCancel(true)
+                                        .setColor(Color.WHITE)
+                                        .setSmallIcon(R.drawable.news)
+                                        .setLargeIcon(bitmapLogo)
+                                        .setStyle(new NotificationCompat.BigPictureStyle()
+                                                .bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.banner))
+                                                .bigLargeIcon(bitmapLogo)
+                                        );
+                                manager.notify(20, mbuilder.build());
+
+
                                 editor.putBoolean("IS_FIRST", false).apply();
                                 IN_SEQUENCE = false;
                             }
@@ -271,7 +304,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }, 1500);
         }
-
 
         PeriodicWorkRequest PWrequest = new PeriodicWorkRequest.Builder(
                 CheckPeriodic.class, 15, TimeUnit.MINUTES, 5, TimeUnit.MINUTES).
@@ -310,7 +342,6 @@ public class MainActivity extends AppCompatActivity {
                 final User users = gson.fromJson(response, User.class);
                 recyclerView.setAdapter(new My_adapter(MainActivity.this, users));
                 loading_anim.setVisibility(View.GONE);
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -343,6 +374,7 @@ public class MainActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
 //      but I am sure that after this 'keyboard is gone'
+
     }
 
     @Override
@@ -408,11 +440,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         //sign out user
                         // and redirect to login screen
-                        firebaseAuth.signOut();
                         Toast.makeText(MainActivity.this, "Signing Out...", Toast.LENGTH_SHORT).show();
+                        firebaseAuth.signOut();
+                        getSharedPreferences(SHARED_PREF, MODE_PRIVATE).edit().clear().apply();
                         finish();
                         startActivity(new Intent(MainActivity.this, PhoneLoginAct.class));
-
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
