@@ -72,7 +72,7 @@ public class Bookmark extends AppCompatActivity {
 
         adapter = new FirebaseRecyclerAdapter<BMarkItems, Bm_viewholder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull final Bm_viewholder holder, int i, @NonNull final BMarkItems items) {
+            protected void onBindViewHolder(@NonNull final Bm_viewholder holder, final int i, @NonNull final BMarkItems items) {
 
                 final String node_id = getRef(i).getKey();
                 if (node_id == null) return;
@@ -86,7 +86,7 @@ public class Bookmark extends AppCompatActivity {
 
                         holder.title.setText(title);
                         pd.dismiss();
-                        Glide.with(holder.bm_image.getContext()).load(image_url)
+                        Glide.with(getBaseContext()).load(image_url)
                                 .centerCrop().placeholder(R.drawable.placeholder).into(holder.bm_image);
 
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -99,8 +99,9 @@ public class Bookmark extends AppCompatActivity {
                         holder.cross.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                holder.itemView.setVisibility(View.GONE);
                                 my_ref.child(node_id).removeValue();
+                                adapter.notifyItemRemoved(i);
+                                adapter.notifyDataSetChanged();
                             }
                         });
 

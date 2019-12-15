@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -35,7 +35,7 @@ public class PhoneLoginAct extends AppCompatActivity {
 
     TextInputLayout phone, otp;
     Button login, getCode;
-    ProgressBar progressBar;
+    LottieAnimationView progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,6 @@ public class PhoneLoginAct extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         auth = FirebaseAuth.getInstance();
-
         if (auth.getCurrentUser() != null) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
@@ -56,10 +55,14 @@ public class PhoneLoginAct extends AppCompatActivity {
         otp = findViewById(R.id.otp);
         getCode = findViewById(R.id.getCode);
         login = findViewById(R.id.login_btn);
-        login.setVisibility(View.INVISIBLE);
-
         progressBar = findViewById(R.id.progressBar3);
         progressBar.setVisibility(View.INVISIBLE);
+
+        getCode.setAlpha(0f);
+        getCode.setTranslationY(50f);
+        login.setAlpha(0f);
+        login.setTranslationY(50f);
+        getCode.animate().alpha(1f).translationY(0f).setDuration(800);
 
         getCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,10 +73,11 @@ public class PhoneLoginAct extends AppCompatActivity {
                     getVerificationCode('+' + "91" + number);
 
                     progressBar.setVisibility(View.VISIBLE);
-                    login.setVisibility(View.VISIBLE);
+                    login.animate().alpha(1f).translationY(0f).setDuration(800);
                     getCode.setVisibility(View.INVISIBLE);
-                } else {
-                    phone.setError("Phone Number Required");
+                }
+                else {
+                    phone.getEditText().setError("Phone Number Required");
                     phone.requestFocus();
                 }
 
@@ -84,7 +88,6 @@ public class PhoneLoginAct extends AppCompatActivity {
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
 //              but I am sure that after this 'keyboard is gone'
-
             }
         });
 
@@ -105,6 +108,9 @@ public class PhoneLoginAct extends AppCompatActivity {
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(VERIFICATION_ID, userCode);
             signInWith(credential);
         } catch (Exception e) {
+            Toast.makeText(this, "Please Try Again\nOTP Might be Incorrect", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, PhoneLoginAct.class));
+            finish();
             e.printStackTrace();
         }
 

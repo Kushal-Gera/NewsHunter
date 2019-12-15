@@ -59,6 +59,7 @@ import com.google.gson.GsonBuilder;
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrInterface;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     Button home, wsj, business, tech, notes, show_notes;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     LottieAnimationView network;
+    SharedPreferences pref;
 
     public long time = 0;
     private boolean searchUsed = false;
@@ -107,6 +109,12 @@ public class MainActivity extends AppCompatActivity {
         SlidrInterface slidrInterface = Slidr.attach(this);
         slidrInterface.lock();
 
+        if (firebaseAuth.getCurrentUser() == null) {
+            startActivity(new Intent(this, PhoneLoginAct.class));
+            finish();
+        }
+
+        pref = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
         loading_anim = findViewById(R.id.progressBar);
         network = findViewById(R.id.network);
         ////////////////////////////////////////////////////////////////////////////////////////////
@@ -188,7 +196,12 @@ public class MainActivity extends AppCompatActivity {
 //      ad stuff here
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId(INTERSTITIAL_ID);
-        interstitialAd.loadAd(new AdRequest.Builder().build());
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                interstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        }, 60 * 1000);
         interstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
@@ -233,7 +246,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         //first guide
-        final SharedPreferences pref = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
         final SharedPreferences.Editor editor = pref.edit();
 
         if (pref.getBoolean("IS_FIRST", true)) {
@@ -308,7 +320,6 @@ public class MainActivity extends AppCompatActivity {
         PeriodicWorkRequest PWrequest = new PeriodicWorkRequest.Builder(
                 CheckPeriodic.class, 15, TimeUnit.MINUTES, 5, TimeUnit.MINUTES).
                 build();
-
         WorkManager.getInstance(this).enqueue(PWrequest);
 
 
@@ -333,15 +344,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadData(String url) {
+
         loading_anim.setVisibility(View.VISIBLE);
+
+        if (!(pref.getString("data", "none")).equals("none")) {
+
+            String response = pref.getString("data", "none");
+
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
+            final User users = gson.fromJson(response, User.class);
+
+            recyclerView.setAdapter(new My_adapter(MainActivity.this, users));
+            loading_anim.setVisibility(View.GONE);
+
+            return;
+        }
+
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 GsonBuilder builder = new GsonBuilder();
                 Gson gson = builder.create();
                 final User users = gson.fromJson(response, User.class);
+
                 recyclerView.setAdapter(new My_adapter(MainActivity.this, users));
                 loading_anim.setVisibility(View.GONE);
+
+                pref.edit().putString("data", response).apply();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -476,6 +507,7 @@ public class MainActivity extends AppCompatActivity {
             nav_tv.setText(getString(R.string.home_news));
             atHome = true;
         } else if (time + 2500 > System.currentTimeMillis()) {
+//            pref.edit().putString("data", "none").apply();
             super.onBackPressed();
         } else {
             Toast.makeText(this, "Press Back Again To Exit", Toast.LENGTH_SHORT).show();

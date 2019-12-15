@@ -135,17 +135,19 @@
 
     </LinearLayout>
 
-    <ProgressBar
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/progressBar3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:layout_below="@+id/linearLayout5"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:indeterminateTint="@color/white"
-        android:visibility="invisible" />
+        android:layout_marginTop="-20dp"
+        android:layout_marginBottom="-20dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/otp"
+        tools:ignore="RtlSymmetry" />
 
     <Button
         android:id="@+id/login_btn"
@@ -154,8 +156,8 @@
         android:layout_below="@+id/progressBar3"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
         android:background="@drawable/simple_bg"
         android:elevation="0dp"
         android:gravity="center"
@@ -170,11 +172,11 @@
         android:layout_below="@+id/progressBar3"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
         android:background="@drawable/simple_bg"
         android:elevation="0dp"
-        android:text="get Code"
+        android:text="@string/get_code"
         android:textColor="@color/colorBlack"
         android:textSize="20sp" />
 

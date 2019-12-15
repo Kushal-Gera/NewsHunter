@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
+
     private static final String TAG = "My_adapter";
     private static final String BOOK_MARK = "bookmarks";
     private static final String LINK = "link";

@@ -28,7 +28,7 @@
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
         android:overScrollMode="never"
-        android:paddingBottom="40dp"
+        android:paddingBottom="60dp"
         android:scrollbarSize="0dp"
         app:layout_constraintBottom_toTopOf="@id/adView6"
         app:layout_constraintEnd_toEndOf="parent"
