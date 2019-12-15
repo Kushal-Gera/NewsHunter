@@ -49,15 +49,13 @@ public class CheckPeriodic extends Worker {
                 Gson gson = builder.create();
                 User users = gson.fromJson(response, User.class);
 
-                checkStuff(users);
+                checkStuff(users, response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.i(TAG, "onErrorResponse: Error in volley");
-                return;
             }
-
         });
 
         Volley.newRequestQueue(mContext).add(request);
@@ -67,7 +65,8 @@ public class CheckPeriodic extends Worker {
 
     }
 
-    private void checkStuff(User users) {
+    private void checkStuff(User users, String response) {
+
         if (users.getTotalResults() >= 1) {
             SharedPreferences pref = mContext.getSharedPreferences("shared_pref", Context.MODE_PRIVATE);
             String early = pref.getString("EARLY", "nill");
@@ -80,6 +79,7 @@ public class CheckPeriodic extends Worker {
                 Log.i(TAG, "checkStuff: Data not changed");
             } else {
                 //notify
+                pref.edit().putString("data", response).apply();
                 Intent intent = new Intent(mContext, MainActivity.class);
                 PendingIntent pi = PendingIntent.getActivity(mContext,
                         101,
@@ -130,6 +130,7 @@ public class CheckPeriodic extends Worker {
             }
 
         }
+
     }
 
 

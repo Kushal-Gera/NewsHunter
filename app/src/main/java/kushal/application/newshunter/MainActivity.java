@@ -35,6 +35,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
@@ -323,6 +324,14 @@ public class MainActivity extends AppCompatActivity {
         WorkManager.getInstance(this).enqueue(PWrequest);
 
 
+        PeriodicWorkRequest request = new PeriodicWorkRequest.Builder(
+                DeleteCache.class, 1, TimeUnit.HOURS, 30, TimeUnit.MINUTES
+        ).build();
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork("delete",
+                ExistingPeriodicWorkPolicy.KEEP,
+                request);
+
+
     }
 
     public void setUpToolBar() {
@@ -347,7 +356,7 @@ public class MainActivity extends AppCompatActivity {
 
         loading_anim.setVisibility(View.VISIBLE);
 
-        if (!(pref.getString("data", "none")).equals("none")) {
+        if (!(Objects.requireNonNull(pref.getString("data", "none"))).equals("none")) {
 
             String response = pref.getString("data", "none");
 
