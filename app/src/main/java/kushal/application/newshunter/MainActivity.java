@@ -160,10 +160,10 @@ public class MainActivity extends AppCompatActivity {
         wsj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                atHome = false;
                 loadData(wsjURL);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 nav_tv.setText(getString(R.string.wall_street_news));
-                atHome = false;
             }
         });
 
@@ -171,10 +171,10 @@ public class MainActivity extends AppCompatActivity {
         business.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                atHome = false;
                 loadData(businessURL);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 nav_tv.setText(getString(R.string.business_news));
-                atHome = false;
             }
         });
 
@@ -182,10 +182,10 @@ public class MainActivity extends AppCompatActivity {
         tech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                atHome = false;
                 loadData(techURL);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 nav_tv.setText(getString(R.string.tech_news));
-                atHome = false;
             }
         });
         ////////////////////////////////////////////////////////////////////////////////////////
@@ -372,7 +372,7 @@ public class MainActivity extends AppCompatActivity {
 
         loading_anim.setVisibility(View.VISIBLE);
 
-        if (!(Objects.requireNonNull(pref.getString("data", "none"))).equals("none")) {
+        if (!(Objects.requireNonNull(pref.getString("data", "none"))).equals("none") && atHome) {
 
             String response = pref.getString("data", "none");
 
