@@ -81,9 +81,13 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences pref;
     SwipeRefreshLayout swipe;
 
+    private boolean atHome = true;
+    private boolean atWsj = false;
+    private boolean atTech = false;
+    private boolean atbusiness = false;
+
     public long time = 0;
     private boolean searchUsed = false;
-    private boolean atHome = true;
     private RequestQueue que = null;
     public static final String api = "cb9951ac79724fe7a06b2c30afb1d831";
     public static final String siteURL = "https://newsapi.org/v2/everything";
@@ -132,14 +136,21 @@ public class MainActivity extends AppCompatActivity {
         setUpToolBar();
         loadData(homeURL);
         atHome = true;
+        final boolean[] shortcuts = new boolean[]{atHome, atbusiness, atWsj, atTech};
         ////////////////////////////////////////////////////////////////////////////////////////////
 
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                pref.edit().putString("data", "none").apply();
                 if (atHome) {
-                    pref.edit().putString("data", "none").apply();
                     loadData(homeURL);
+                } else if (atbusiness) {
+                    loadData(businessURL);
+                } else if (atWsj) {
+                    loadData(wsjURL);
+                } else if (atTech) {
+                    loadData(techURL);
                 }
                 swipe.setRefreshing(false);
             }
@@ -149,6 +160,8 @@ public class MainActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (boolean bool : shortcuts)
+                    bool = false;
                 loadData(homeURL);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 nav_tv.setText(getString(R.string.home_news));
@@ -160,6 +173,8 @@ public class MainActivity extends AppCompatActivity {
         wsj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (boolean bool : shortcuts)
+                    bool = false;
                 atHome = false;
                 loadData(wsjURL);
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -171,6 +186,8 @@ public class MainActivity extends AppCompatActivity {
         business.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (boolean bool : shortcuts)
+                    bool = false;
                 atHome = false;
                 loadData(businessURL);
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -182,6 +199,8 @@ public class MainActivity extends AppCompatActivity {
         tech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (boolean bool : shortcuts)
+                    bool = false;
                 atHome = false;
                 loadData(techURL);
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -397,7 +416,8 @@ public class MainActivity extends AppCompatActivity {
                 recyclerView.setAdapter(new My_adapter(MainActivity.this, users));
                 loading_anim.setVisibility(View.GONE);
 
-                pref.edit().putString("data", response).apply();
+                if (atHome)
+                    pref.edit().putString("data", response).apply();
             }
         }, new Response.ErrorListener() {
             @Override
