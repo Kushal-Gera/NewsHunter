@@ -35,6 +35,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     LottieAnimationView network;
     SharedPreferences pref;
+    SwipeRefreshLayout swipe;
 
     public long time = 0;
     private boolean searchUsed = false;
@@ -118,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         pref = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
         loading_anim = findViewById(R.id.progressBar);
         network = findViewById(R.id.network);
+        swipe = findViewById(R.id.swipe);
         ////////////////////////////////////////////////////////////////////////////////////////////
 
         main = findViewById(R.id.main);
@@ -130,6 +133,18 @@ public class MainActivity extends AppCompatActivity {
         loadData(homeURL);
         atHome = true;
         ////////////////////////////////////////////////////////////////////////////////////////////
+
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (atHome) {
+                    pref.edit().putString("data", "none").apply();
+                    loadData(homeURL);
+                }
+                swipe.setRefreshing(false);
+            }
+        });
+
         home = findViewById(R.id.home);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -319,17 +334,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         PeriodicWorkRequest PWrequest = new PeriodicWorkRequest.Builder(
-                CheckPeriodic.class, 15, TimeUnit.MINUTES, 5, TimeUnit.MINUTES).
-                build();
+                CheckPeriodic.class, 15, TimeUnit.MINUTES, 5, TimeUnit.MINUTES
+        ).build();
         WorkManager.getInstance(this).enqueue(PWrequest);
 
 
         PeriodicWorkRequest request = new PeriodicWorkRequest.Builder(
                 DeleteCache.class, 1, TimeUnit.HOURS, 30, TimeUnit.MINUTES
         ).build();
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork("delete",
-                ExistingPeriodicWorkPolicy.KEEP,
-                request);
+        WorkManager.getInstance(this)
+                .enqueueUniquePeriodicWork("delete",
+                        ExistingPeriodicWorkPolicy.KEEP,
+                        request);
 
 
     }
