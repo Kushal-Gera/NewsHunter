@@ -160,12 +160,6 @@
 
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/seperator_line" />
-
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

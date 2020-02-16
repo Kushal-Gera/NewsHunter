@@ -20,23 +20,4 @@
         android:contentDescription="@string/image_description"
         android:src="@drawable/logo_red" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/cbLogo"
-        android:layout_marginBottom="5dp"
-        android:gravity="center"
-        android:text="@string/powered_by"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
-
-    <ImageView
-        android:id="@+id/cbLogo"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
-        android:contentDescription="@string/description"
-        android:src="@drawable/cb_logo" />
-
 </RelativeLayout>
