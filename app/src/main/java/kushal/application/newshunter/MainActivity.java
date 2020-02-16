@@ -72,8 +72,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout main;
 
     LinearLayout navBar;
-    TextView nav_tv;
-    Button home, wsj, business, tech, notes, show_notes;
+    TextView nav_tv, home, wsj, business, tech, notes, show_notes;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     LottieAnimationView network;
     SharedPreferences pref;

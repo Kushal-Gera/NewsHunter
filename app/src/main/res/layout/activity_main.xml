@@ -63,59 +63,78 @@
     </LinearLayout>
 
     <!--    menu is here-->
+
     <LinearLayout
         android:id="@+id/navBar"
-        android:layout_width="240dp"
+        android:layout_width="260dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/colorPrimaryTransparent"
+        android:background="#eee"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/nav_tv"
-            android:layout_width="241dp"
+            android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
+            android:layout_margin="2dp"
             android:background="@drawable/drawer_tv"
             android:gravity="center"
             android:text="@string/home_news"
-            android:textColor="@color/colorBlack"
-            android:textSize="25sp" />
+            android:textColor="@color/white"
+            android:textScaleX="1.1"
+            android:textSize="21sp" />
 
-        <Button
+        <TextView
             android:id="@+id/home"
             android:layout_width="170dp"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_nav_btn"
-            android:text="@string/home_news" />
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:drawableStart="@drawable/ic_home_black_24dp"
+            android:gravity="center"
+            android:text="@string/home_news"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp" />
 
-        <Button
+        <TextView
             android:id="@+id/business"
             android:layout_width="170dp"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_nav_btn"
-            android:text="@string/business_news" />
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:drawableStart="@drawable/ic_business_black_24dp"
+            android:gravity="center"
+            android:text="@string/business_news"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp" />
 
-        <Button
+        <TextView
             android:id="@+id/wsj"
             android:layout_width="170dp"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_nav_btn"
-            android:text="@string/wall_street_news" />
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:drawableStart="@drawable/ic_account_balance_wallet_black_24dp"
+            android:gravity="center"
+            android:text="@string/wall_street_news"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp" />
 
-        <Button
+        <TextView
             android:id="@+id/tech"
             android:layout_width="170dp"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_nav_btn"
-            android:text="@string/tech_news" />
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:drawableStart="@drawable/tech"
+            android:gravity="center"
+            android:text="@string/tech_news"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -127,29 +146,40 @@
             android:textColor="@color/colorBlack"
             android:textSize="15sp" />
 
-        <TextView
+        <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="22dp"
-            android:background="@drawable/seperator_subtle" />
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="12dp"
+            android:background="@color/colorPrimary" />
 
-        <Button
+        <TextView
             android:id="@+id/notes"
             android:layout_width="170dp"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-            android:background="@drawable/bg_nav_btn"
-            android:text="@string/take_notes" />
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:drawableStart="@drawable/take_note"
+            android:gravity="center"
+            android:text="@string/take_notes"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp" />
 
-        <Button
+        <TextView
             android:id="@+id/show_notes"
             android:layout_width="170dp"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_nav_btn"
-            android:text="@string/show_notes" />
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:drawableStart="@drawable/saved"
+            android:gravity="center"
+            android:text="@string/show_notes"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
