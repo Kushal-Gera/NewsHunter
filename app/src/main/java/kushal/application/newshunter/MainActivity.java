@@ -36,7 +36,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
@@ -61,7 +60,6 @@ import com.google.gson.GsonBuilder;
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrInterface;
 
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -136,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
         setUpToolBar();
         loadData(homeURL);
         atHome = true;
-        final boolean[] shortcuts = new boolean[]{atHome, atbusiness, atWsj, atTech};
         ////////////////////////////////////////////////////////////////////////////////////////////
 
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -145,11 +142,14 @@ public class MainActivity extends AppCompatActivity {
                 pref.edit().putString("data", "none").apply();
                 if (atHome) {
                     loadData(homeURL);
-                } else if (atbusiness) {
+                }
+                else if (atbusiness) {
                     loadData(businessURL);
-                } else if (atWsj) {
+                }
+                else if (atWsj) {
                     loadData(wsjURL);
-                } else if (atTech) {
+                }
+                else if (atTech) {
                     loadData(techURL);
                 }
                 swipe.setRefreshing(false);
@@ -160,8 +160,6 @@ public class MainActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (boolean bool : shortcuts)
-                    bool = false;
                 loadData(homeURL);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 nav_tv.setText(getString(R.string.home_news));
@@ -173,8 +171,6 @@ public class MainActivity extends AppCompatActivity {
         wsj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (boolean bool : shortcuts)
-                    bool = false;
                 atHome = false;
                 loadData(wsjURL);
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -186,8 +182,6 @@ public class MainActivity extends AppCompatActivity {
         business.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (boolean bool : shortcuts)
-                    bool = false;
                 atHome = false;
                 loadData(businessURL);
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -199,8 +193,6 @@ public class MainActivity extends AppCompatActivity {
         tech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (boolean bool : shortcuts)
-                    bool = false;
                 atHome = false;
                 loadData(techURL);
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -358,15 +350,6 @@ public class MainActivity extends AppCompatActivity {
         WorkManager.getInstance(this).enqueue(PWrequest);
 
 
-        PeriodicWorkRequest request = new PeriodicWorkRequest.Builder(
-                DeleteCache.class, 1, TimeUnit.HOURS, 30, TimeUnit.MINUTES
-        ).build();
-        WorkManager.getInstance(this)
-                .enqueueUniquePeriodicWork("delete",
-                        ExistingPeriodicWorkPolicy.KEEP,
-                        request);
-
-
     }
 
     public void setUpToolBar() {
@@ -390,20 +373,6 @@ public class MainActivity extends AppCompatActivity {
     private void loadData(String url) {
 
         loading_anim.setVisibility(View.VISIBLE);
-
-        if (!(Objects.requireNonNull(pref.getString("data", "none"))).equals("none") && atHome) {
-
-            String response = pref.getString("data", "none");
-
-            GsonBuilder builder = new GsonBuilder();
-            Gson gson = builder.create();
-            final User users = gson.fromJson(response, User.class);
-
-            recyclerView.setAdapter(new My_adapter(MainActivity.this, users));
-            loading_anim.setVisibility(View.GONE);
-
-            return;
-        }
 
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
@@ -552,7 +521,6 @@ public class MainActivity extends AppCompatActivity {
             nav_tv.setText(getString(R.string.home_news));
             atHome = true;
         } else if (time + 2500 > System.currentTimeMillis()) {
-//            pref.edit().putString("data", "none").apply();
             super.onBackPressed();
         } else {
             Toast.makeText(this, "Press Back Again To Exit", Toast.LENGTH_SHORT).show();

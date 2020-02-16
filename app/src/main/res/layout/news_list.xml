@@ -30,7 +30,8 @@
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/image_description"
                     android:scaleType="centerInside"
-                    android:src="@drawable/placeholder" />
+                    android:src="@drawable/placeholder"
+                    android:transitionName="image" />
 
                 <TextView
                     android:id="@+id/author"

@@ -135,7 +135,6 @@ public class Bookmark extends AppCompatActivity {
 
         };
 
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
