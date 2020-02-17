@@ -2,12 +2,14 @@ package kushal.application.newshunter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,8 +32,10 @@ import java.util.concurrent.TimeUnit;
 public class PhoneLoginAct extends AppCompatActivity {
     //    private static final String TAG = "LoginAct";
     private static String VERIFICATION_ID;
+    public static final String GITHUB_LINK = "https://github.com/Kushal-Gera";
 
     FirebaseAuth auth;
+    ImageView logo_img;
 
     TextInputLayout phone, otp;
     Button login, getCode;
@@ -52,6 +56,7 @@ public class PhoneLoginAct extends AppCompatActivity {
         }
 
         phone = findViewById(R.id.phone);
+        logo_img = findViewById(R.id.logo_img);
         otp = findViewById(R.id.otp);
         getCode = findViewById(R.id.getCode);
         login = findViewById(R.id.login_btn);
@@ -64,6 +69,13 @@ public class PhoneLoginAct extends AppCompatActivity {
         login.setTranslationY(50f);
         getCode.animate().alpha(1f).translationY(0f).setDuration(800);
 
+        logo_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GITHUB_LINK)));
+            }
+        });
+
         getCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,8 +87,7 @@ public class PhoneLoginAct extends AppCompatActivity {
                     progressBar.setVisibility(View.VISIBLE);
                     login.animate().alpha(1f).translationY(0f).setDuration(800);
                     getCode.setVisibility(View.INVISIBLE);
-                }
-                else {
+                } else {
                     phone.getEditText().setError("Phone Number Required");
                     phone.requestFocus();
                 }

@@ -20,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -141,14 +140,11 @@ public class MainActivity extends AppCompatActivity {
                 pref.edit().putString("data", "none").apply();
                 if (atHome) {
                     loadData(homeURL);
-                }
-                else if (atbusiness) {
+                } else if (atbusiness) {
                     loadData(businessURL);
-                }
-                else if (atWsj) {
+                } else if (atWsj) {
                     loadData(wsjURL);
-                }
-                else if (atTech) {
+                } else if (atTech) {
                     loadData(techURL);
                 }
                 swipe.setRefreshing(false);
