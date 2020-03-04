@@ -90,14 +90,21 @@
                     android:textSize="15sp"
                     tools:text="author" />
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:contentDescription="@string/description"
+                    android:src="@drawable/date_xx"
+                    android:tint="#555" />
+
                 <TextView
                     android:id="@+id/date"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginStart="80dp"
                     android:gravity="center"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="#555"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     tools:text="20-20-20" />
