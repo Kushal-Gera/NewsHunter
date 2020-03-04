@@ -65,7 +65,6 @@
     </LinearLayout>
 
     <!--    menu is here-->
-
     <LinearLayout
         android:id="@+id/navBar"
         android:layout_width="260dp"

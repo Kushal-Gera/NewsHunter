@@ -22,6 +22,8 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.r0adkll.slidr.Slidr;
 
+import java.text.SimpleDateFormat;
+
 public class Big_image_act extends AppCompatActivity {
 
 
@@ -33,7 +35,6 @@ public class Big_image_act extends AppCompatActivity {
         Slidr.attach(this);
 
         getIncomingIntent();
-
 
 //      ad stuff......
         AdView adView;
@@ -51,6 +52,8 @@ public class Big_image_act extends AppCompatActivity {
             ImageView big_img = findViewById(R.id.big_img);
             ImageView share = findViewById(R.id.share2);
             TextView big_name = findViewById(R.id.big_name);
+            TextView author = findViewById(R.id.author);
+            TextView date = findViewById(R.id.date);
             TextView big_cont = findViewById(R.id.big_content);
             final ProgressBar progressBar = findViewById(R.id.progressBar);
             final Button btn = findViewById(R.id.btn);
@@ -61,8 +64,12 @@ public class Big_image_act extends AppCompatActivity {
             final String name = getIntent().getStringExtra("big_title");
             final String cont = getIntent().getStringExtra("big_cont");
             final String link = getIntent().getStringExtra("big_link");
+            final String author_name = getIntent().getStringExtra("author_name");
+            final String date_txt = getIntent().getStringExtra("date_txt");
 
 //          setting the content received
+            date.setText(date_txt);
+            author.setText(author_name);
             big_name.setText(name);
             big_cont.setText(cont);
             Glide.with(big_img.getContext()).load(imageUrl).placeholder(R.drawable.placeholder).centerCrop().into(big_img);

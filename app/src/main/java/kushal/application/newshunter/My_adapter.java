@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,6 +97,8 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
                     intent.putExtra("big_title", model.getTitle());
                     intent.putExtra("big_cont", model.getContent());
                     intent.putExtra("big_link", model.getUrl());
+                    intent.putExtra("author_name", model.getAuthor());
+                    intent.putExtra("date_txt", getDate(model.getPublishedAt()));
 
                     myContext.startActivity(intent);
                 }
@@ -128,15 +129,14 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
         return data.getArticles().length < 1 ? 1 : data.getArticles().length;
     }
 
+    @SuppressLint("SimpleDateFormat")
     private String getDate(String oldDate) {
         String newDate;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", new Locale("india"));
         try {
-            @SuppressLint("SimpleDateFormat")
             Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(oldDate);
             newDate = dateFormat.format(date);
         } catch (Exception e) {
-            Log.d(TAG, "getDate: date error" + e.getMessage());
             newDate = oldDate;
         }
         return newDate;
