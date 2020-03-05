@@ -93,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String techURL = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=cb9951ac79724fe7a06b2c30afb1d831";
     public static final String SHARED_PREF = "shared_pref";
 
+    public static String CURRENT = "";
+
     //ad stuff....
     private InterstitialAd interstitialAd;
     public static final String INTERSTITIAL_ID = "ca-app-pub-5073642246912223/8824671181";
@@ -366,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadData(String url) {
-
+        CURRENT = url;
         loading_anim.setVisibility(View.VISIBLE);
 
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
@@ -526,6 +528,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData(CURRENT);
+    }
 }
 
