@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     boolean target = false;
     boolean IN_SEQUENCE = false;
+    boolean small = false;
 
 
     @Override
@@ -345,6 +346,7 @@ public class MainActivity extends AppCompatActivity {
         WorkManager.getInstance(this).enqueue(PWrequest);
 
 
+        small = pref.getBoolean("small", false);
     }
 
     public void setUpToolBar() {
@@ -377,7 +379,7 @@ public class MainActivity extends AppCompatActivity {
                 Gson gson = builder.create();
                 final User users = gson.fromJson(response, User.class);
 
-                recyclerView.setAdapter(new My_adapter(MainActivity.this, users));
+                recyclerView.setAdapter(new My_adapter(MainActivity.this, users, small));
                 loading_anim.setVisibility(View.GONE);
 
                 if (atHome)

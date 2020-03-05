@@ -36,11 +36,13 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
     private Activity myAct;
     private User data;
     private Boolean flag = false;
+    private Boolean small;
 
-    My_adapter(Context context, User data) {
+    My_adapter(Context context, User data, Boolean small) {
         myContext = context;
         myAct = (Activity) context;
         this.data = data;
+        this.small = small;
         if (data.getTotalResults() <= 1) flag = true;
 
     }
@@ -49,7 +51,12 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
     @Override
     public My_viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         LayoutInflater inflater = LayoutInflater.from(myContext);
-        View view = inflater.inflate((R.layout.news_list), parent, false);
+        View view;
+        if (!small)
+            view = inflater.inflate((R.layout.news_list), parent, false);
+        else
+            view = inflater.inflate((R.layout.news_list_2), parent, false);
+
         return new My_viewHolder(view);
     }
 
