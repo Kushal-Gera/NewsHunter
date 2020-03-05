@@ -163,6 +163,50 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/small_btn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/new_btn_bg"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/checked"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginStart="30dp"
+                android:contentDescription="@string/description"
+                android:src="@drawable/ic_check_box_black_24dp"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:id="@+id/un_checked_"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginStart="30dp"
+                android:contentDescription="@string/description"
+                android:src="@drawable/ic_check_box_outline_blank_black_24dp"
+                android:visibility="gone"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="-20dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="end"
+                android:padding="10dp"
+                android:text="@string/small_layout"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <TextView

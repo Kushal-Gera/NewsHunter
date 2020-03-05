@@ -2,10 +2,12 @@ package kushal.application.newshunter;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,8 +27,10 @@ public class SettingsAct extends AppCompatActivity {
     public static final String API_LINK = "https://newsapi.org/";
     public final String WEB_APP_LINK = "http://play.google.com/store/apps/details?id=" + "kushal.application.newshunter";
 
-    LinearLayout developer, suggest, share, rate;
+    LinearLayout developer, suggest, share, rate, small_btn;
     TextView api_link;
+    Boolean small;
+    ImageView checked, unchecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +40,46 @@ public class SettingsAct extends AppCompatActivity {
 
         Slidr.attach(this);
 
+        final SharedPreferences pref = getSharedPreferences("shared_pref", MODE_PRIVATE);
+        small = pref.getBoolean("small", false);
+
         developer = findViewById(R.id.developer);
         suggest = findViewById(R.id.suggest);
         share = findViewById(R.id.Share_app);
         rate = findViewById(R.id.rate);
         api_link = findViewById(R.id.api_link);
+        small_btn = findViewById(R.id.small_btn);
+
+        unchecked = findViewById(R.id.un_checked_);
+        checked = findViewById(R.id.checked);
+
+        if (small) {
+            checked.setVisibility(View.GONE);
+            unchecked.setVisibility(View.VISIBLE);
+        }
+        else {
+            unchecked.setVisibility(View.GONE);
+            checked.setVisibility(View.VISIBLE);
+        }
+
+        small_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                small = !small;
+                pref.edit().putBoolean("small", small).apply();
+
+                if (small) {
+                    checked.setVisibility(View.GONE);
+                    unchecked.setVisibility(View.VISIBLE);
+                }
+                else {
+                    unchecked.setVisibility(View.GONE);
+                    checked.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
 
         developer.setOnClickListener(new View.OnClickListener() {
             @Override

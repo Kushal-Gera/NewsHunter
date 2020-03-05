@@ -345,8 +345,6 @@ public class MainActivity extends AppCompatActivity {
         ).build();
         WorkManager.getInstance(this).enqueue(PWrequest);
 
-
-        small = pref.getBoolean("small", false);
     }
 
     public void setUpToolBar() {
@@ -378,6 +376,8 @@ public class MainActivity extends AppCompatActivity {
                 GsonBuilder builder = new GsonBuilder();
                 Gson gson = builder.create();
                 final User users = gson.fromJson(response, User.class);
+
+                small = pref.getBoolean("small", false);
 
                 recyclerView.setAdapter(new My_adapter(MainActivity.this, users, small));
                 loading_anim.setVisibility(View.GONE);
