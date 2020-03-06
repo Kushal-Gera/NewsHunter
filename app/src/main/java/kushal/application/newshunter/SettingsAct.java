@@ -53,11 +53,10 @@ public class SettingsAct extends AppCompatActivity {
         unchecked = findViewById(R.id.un_checked_);
         checked = findViewById(R.id.checked);
 
-        if (small) {
+        if (!small) {
             checked.setVisibility(View.GONE);
             unchecked.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             unchecked.setVisibility(View.GONE);
             checked.setVisibility(View.VISIBLE);
         }
@@ -69,11 +68,10 @@ public class SettingsAct extends AppCompatActivity {
                 small = !small;
                 pref.edit().putBoolean("small", small).apply();
 
-                if (small) {
+                if (!small) {
                     checked.setVisibility(View.GONE);
                     unchecked.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     unchecked.setVisibility(View.GONE);
                     checked.setVisibility(View.VISIBLE);
                 }
