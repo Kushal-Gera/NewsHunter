@@ -12,8 +12,8 @@ import com.airbnb.lottie.LottieAnimationView;
 
 class My_viewHolder extends RecyclerView.ViewHolder {
 
-    ImageView img, UnSaveStar, share;
-    LinearLayout main_ll;
+    ImageView img, share;
+    private LinearLayout main_ll;
     TextView title, description, source, author, date;
     View dateView;
     LottieAnimationView animationView;
@@ -29,9 +29,6 @@ class My_viewHolder extends RecyclerView.ViewHolder {
         source = itemView.findViewById(R.id.source);
         author = itemView.findViewById(R.id.author);
         dateView = itemView.findViewById(R.id.dateView);
-
-//         saveStar = itemView.findViewById(R.id.saveStar);
-        UnSaveStar = itemView.findViewById(R.id.UnSaveStar);
 
         share = itemView.findViewById(R.id.share);
         animationView = itemView.findViewById(R.id.animation_view);

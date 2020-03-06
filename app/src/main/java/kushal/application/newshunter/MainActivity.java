@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     LottieAnimationView loading_anim;
     LinearLayout main;
+    My_adapter adapter;
 
     LinearLayout navBar;
     TextView nav_tv, home, wsj, business, tech, notes, show_notes;
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String techURL = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=cb9951ac79724fe7a06b2c30afb1d831";
     public static final String SHARED_PREF = "shared_pref";
 
-    public static String CURRENT = "";
+    public static User CURRENT = null;
 
     //ad stuff....
     private InterstitialAd interstitialAd;
@@ -368,7 +369,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadData(String url) {
-        CURRENT = url;
         loading_anim.setVisibility(View.VISIBLE);
 
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
@@ -378,10 +378,11 @@ public class MainActivity extends AppCompatActivity {
                 GsonBuilder builder = new GsonBuilder();
                 Gson gson = builder.create();
                 final User users = gson.fromJson(response, User.class);
+                CURRENT = users;
 
                 small = pref.getBoolean("small", false);
-
-                recyclerView.setAdapter(new My_adapter(MainActivity.this, users, small));
+                adapter = new My_adapter(MainActivity.this, users, small);
+                recyclerView.setAdapter(adapter);
                 loading_anim.setVisibility(View.GONE);
 
                 if (atHome)
@@ -419,6 +420,12 @@ public class MainActivity extends AppCompatActivity {
         }
 //      but I am sure that after this 'keyboard is gone'
 
+    }
+
+    private void loadData_saved(User users) {
+        small = pref.getBoolean("small", false);
+        adapter = new My_adapter(MainActivity.this, users, small);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -531,7 +538,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadData(CURRENT);
+
+        if (CURRENT != null)
+            loadData_saved(CURRENT);
+
     }
 }
 

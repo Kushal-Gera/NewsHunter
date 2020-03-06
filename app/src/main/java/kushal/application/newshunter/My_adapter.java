@@ -71,7 +71,6 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
             holder.dateView.setVisibility(View.GONE);
             holder.animationView.setVisibility(View.GONE);
             holder.share.setVisibility(View.GONE);
-            holder.UnSaveStar.setVisibility(View.GONE);
         } else {
             Article[] articles = data.getArticles();
             final Article model = articles[position];
@@ -83,7 +82,6 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
             holder.date.setText(getDate(model.getPublishedAt()));
             Glide.with(myContext).load(model.getUrlToImage()).placeholder(R.drawable.placeholder).centerCrop().into(holder.img);
 
-            holder.UnSaveStar.setVisibility(View.GONE);
             holder.animationView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -91,8 +89,7 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
                     bookMark(model.getUrl(), model.getUrlToImage(), model.getTitle());
                     Snackbar.make(v, "Bookmarked", Snackbar.LENGTH_SHORT).show();
 
-                    holder.UnSaveStar.setVisibility(View.VISIBLE);
-                    holder.animationView.setVisibility(View.GONE);
+                    holder.animationView.setVisibility(View.INVISIBLE);
                 }
             });
 
