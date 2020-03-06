@@ -88,11 +88,12 @@
 
         <TextView
             android:id="@+id/home"
-            android:layout_width="170dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="40dp"
             android:drawableStart="@drawable/ic_home_black_24dp"
             android:gravity="center"
             android:text="@string/home_news"
@@ -101,11 +102,12 @@
 
         <TextView
             android:id="@+id/business"
-            android:layout_width="170dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="40dp"
             android:drawableStart="@drawable/ic_business_black_24dp"
             android:gravity="center"
             android:text="@string/business_news"
@@ -114,11 +116,12 @@
 
         <TextView
             android:id="@+id/wsj"
-            android:layout_width="170dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="40dp"
             android:drawableStart="@drawable/ic_account_balance_wallet_black_24dp"
             android:gravity="center"
             android:text="@string/wall_street_news"
@@ -127,11 +130,12 @@
 
         <TextView
             android:id="@+id/tech"
-            android:layout_width="170dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="40dp"
             android:drawableStart="@drawable/tech"
             android:gravity="center"
             android:text="@string/tech_news"
@@ -159,11 +163,12 @@
 
         <TextView
             android:id="@+id/notes"
-            android:layout_width="170dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="40dp"
             android:drawableStart="@drawable/take_note"
             android:gravity="center"
             android:text="@string/take_notes"
@@ -172,11 +177,12 @@
 
         <TextView
             android:id="@+id/show_notes"
-            android:layout_width="170dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="40dp"
             android:drawableStart="@drawable/saved"
             android:gravity="center"
             android:text="@string/show_notes"

@@ -429,6 +429,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (CURRENT != null)
+            loadData_saved(CURRENT);
+
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         target = true;
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -535,13 +544,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (CURRENT != null)
-            loadData_saved(CURRENT);
-
-    }
 }
 
