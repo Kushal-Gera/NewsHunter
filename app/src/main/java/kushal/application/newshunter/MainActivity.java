@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     My_adapter adapter;
 
     LinearLayout navBar;
-    TextView nav_tv, home, wsj, business, tech, notes, show_notes;
+    TextView nav_tv, home, wsj, business, tech, notes, show_notes, offline;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     LottieAnimationView network;
     SharedPreferences pref;
@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String SHARED_PREF = "shared_pref";
 
     public static User CURRENT = null;
+    public static String LINK;
 
     //ad stuff....
     private InterstitialAd interstitialAd;
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String GENERAL = "general";
 
     boolean target = false;
+    boolean IS_BLOCKED = false;
     boolean IN_SEQUENCE = false;
     boolean small = false;
 
@@ -125,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
         loading_anim = findViewById(R.id.progressBar);
         network = findViewById(R.id.network);
         swipe = findViewById(R.id.swipe);
+        offline = findViewById(R.id.offline);
+        LINK = pref.getString("saved", "none");
         ////////////////////////////////////////////////////////////////////////////////////////////
 
         main = findViewById(R.id.main);
@@ -141,6 +145,9 @@ public class MainActivity extends AppCompatActivity {
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                swipe.setRefreshing(false);
+                if (IS_BLOCKED)
+                    return;
                 pref.edit().putString("data", "none").apply();
                 if (atHome) {
                     loadData(homeURL);
@@ -151,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
                 } else if (atTech) {
                     loadData(techURL);
                 }
-                swipe.setRefreshing(false);
             }
         });
 
@@ -368,7 +374,7 @@ public class MainActivity extends AppCompatActivity {
                 .build().toString();
     }
 
-    private void loadData(String url) {
+    private void loadData(final String url) {
         loading_anim.setVisibility(View.VISIBLE);
 
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
@@ -379,6 +385,7 @@ public class MainActivity extends AppCompatActivity {
                 Gson gson = builder.create();
                 final User users = gson.fromJson(response, User.class);
                 CURRENT = users;
+                LINK = response;
 
                 small = pref.getBoolean("small", false);
                 adapter = new My_adapter(MainActivity.this, users, small);
@@ -393,6 +400,11 @@ public class MainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 //                Toast.makeText(MainActivity.this, "Internet May Not be Available", Toast.LENGTH_LONG).show();
                 atHome = true;
+                final String response = pref.getString("saved", "none");
+                if (!"none".equals(response)) {
+                    offline.setVisibility(View.VISIBLE);
+                }
+
                 loading_anim.setVisibility(View.GONE);
                 network.setVisibility(View.VISIBLE);
                 Snackbar.make(network, "Internet May Not be Available", Snackbar.LENGTH_INDEFINITE)
@@ -405,6 +417,18 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .setActionTextColor(getResources().getColor(R.color.colorPrimaryDark))
                         .show();
+
+                offline.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LINK = response;
+                        IS_BLOCKED = true;
+                        network.setVisibility(View.GONE);
+                        offline.setVisibility(View.GONE);
+                        loadOfflineData(response);
+                    }
+                });
+
             }
         });
 
@@ -422,19 +446,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void loadOfflineData(String response) {
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        final User users = gson.fromJson(response, User.class);
+        CURRENT = users;
+
+        small = pref.getBoolean("small", false);
+        adapter = new My_adapter(MainActivity.this, users, small);
+        recyclerView.setAdapter(adapter);
+        loading_anim.setVisibility(View.GONE);
+    }
+
     private void loadData_saved(User users) {
         small = pref.getBoolean("small", false);
         adapter = new My_adapter(MainActivity.this, users, small);
         recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (CURRENT != null)
-            loadData_saved(CURRENT);
-
     }
 
     @Override
@@ -482,6 +509,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, Bookmark.class));
                 break;
 
+            case R.id.offline:
+                if("none".equals(LINK))
+                    break;
+                Toast.makeText(this, "Saved Page For Offline Reading", Toast.LENGTH_SHORT).show();
+                getSharedPreferences(SHARED_PREF, MODE_PRIVATE).edit().putString("saved", LINK).apply();
+
+                break;
+
             case R.id.logout:
                 signOut();
                 break;
@@ -517,6 +552,15 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (CURRENT != null)
+            loadData_saved(CURRENT);
 
     }
 

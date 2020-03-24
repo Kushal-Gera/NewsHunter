@@ -80,7 +80,9 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
             holder.source.setText(model.getSource().getName());
             holder.author.setText(model.getAuthor());
             holder.date.setText(getDate(model.getPublishedAt()));
-            Glide.with(myContext).load(model.getUrlToImage()).placeholder(R.drawable.placeholder).centerCrop().into(holder.img);
+            Glide.with(myContext).load(model.getUrlToImage())
+                    .placeholder(R.drawable.placeholder)
+                    .centerCrop().into(holder.img);
 
             holder.animationView.setOnClickListener(new View.OnClickListener() {
                 @Override
