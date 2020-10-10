@@ -1,5 +1,6 @@
 # NewsHunter
-### Stay Updated, Stay Relevent  
+### Stay Updated, Stay Relevent
+---  
 
 ## Libraries Used for the Project
 
