@@ -1,6 +1,5 @@
 # NewsHunter
-### Your Daily Does of News...
----  
+###$ Your Daily Does of News...  
 
 ## Libraries Used for the Project
 
