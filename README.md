@@ -1,5 +1,5 @@
 # NewsHunter
-###$ Your Daily Does of News...  
+### Stay Updated, Stay Relevent  
 
 ## Libraries Used for the Project
 
