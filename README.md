@@ -10,7 +10,7 @@
 * ##### com.r0adkll:slidableactivity:2.1.x
 * ##### org.jetbrains.kotlinx:kotlinx-coroutines-android:1.x.x
 * ##### de.hdodenhof:circleimageview:3.x.x
-* ##### com.squareup.picasso:picasso:2.xxxx
+* ##### com.squareup.picasso:picasso:2.xx
 ---
 
 ## Screenshots  
