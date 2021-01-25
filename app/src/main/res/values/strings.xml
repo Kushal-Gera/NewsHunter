@@ -3,7 +3,7 @@
     <string name="image_description">image will be updated with content from the news feed</string>
     <string name="app_heading">Latest News Available</string>
     <string name="menu_search">Search</string>
-    <string name="menu_setting">About Us</string>
+    <string name="menu_setting">More</string>
     <string name="search_hint">Enter News Tags</string>
     <string name="btn_txt">Read More</string>
     <string name="business_news">Business News</string>

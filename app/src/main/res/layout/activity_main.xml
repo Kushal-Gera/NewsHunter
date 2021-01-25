@@ -5,7 +5,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EFEFEF"
+    android:background="#E9ECEF"
     android:fitsSystemWindows="true"
     android:keepScreenOn="true">
 

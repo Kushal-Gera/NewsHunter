@@ -43,7 +43,8 @@ public class My_adapter extends RecyclerView.Adapter<My_viewHolder> {
         myAct = (Activity) context;
         this.data = data;
         this.small = small;
-        if (data.getTotalResults() <= 1) flag = true;
+        if (data.getTotalResults() <= 1)
+            flag = true;
 
     }
 

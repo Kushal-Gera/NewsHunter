@@ -39,6 +39,9 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -46,9 +49,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -59,6 +59,8 @@ import com.google.gson.GsonBuilder;
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrInterface;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String api = "cb9951ac79724fe7a06b2c30afb1d831";
     public static final String siteURL = "https://newsapi.org/v2/everything";
     public static final String homeURL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=cb9951ac79724fe7a06b2c30afb1d831";
+    //    public static final String homeURL = "https://newsapi.org/v2/everything?q=bitcoin&from=2020-12-25&sortBy=publishedAt&apiKey=ea6bec1ed711479b9d970525c589ead2";
     public static final String businessURL = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=cb9951ac79724fe7a06b2c30afb1d831";
     public static final String wsjURL = "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=cb9951ac79724fe7a06b2c30afb1d831";
     public static final String techURL = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=cb9951ac79724fe7a06b2c30afb1d831";
@@ -97,10 +100,6 @@ public class MainActivity extends AppCompatActivity {
     public static User CURRENT = null;
     public static String LINK;
 
-    //ad stuff....
-    private InterstitialAd interstitialAd;
-    public static final String INTERSTITIAL_ID = "ca-app-pub-5073642246912223/8824671181";
-
     public static final String NOTIFICATION = "Notify";
     public static final String GENERAL = "general";
 
@@ -108,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
     boolean IS_BLOCKED = false;
     boolean IN_SEQUENCE = false;
     boolean small = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -223,37 +221,6 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
-
-
-//      ad stuff here
-        interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(INTERSTITIAL_ID);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                interstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-        }, 60 * 1000);
-        interstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-                Handler h = new Handler();
-                h.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        interstitialAd.loadAd(new AdRequest.Builder().build());
-                    }
-                }, 2 * 60 * 1000);
-            }
-
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                interstitialAd.show();
-            }
-        });
-
 
         //Notification stuff starts here
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -377,29 +344,37 @@ public class MainActivity extends AppCompatActivity {
     private void loadData(final String url) {
         loading_anim.setVisibility(View.VISIBLE);
 
-        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                try {
+                    GsonBuilder builder = new GsonBuilder();
+                    Gson gson = builder.create();
+                    User users = gson.fromJson(response, User.class);
+                    CURRENT = users;
+                    LINK = response;
 
-                GsonBuilder builder = new GsonBuilder();
-                Gson gson = builder.create();
-                final User users = gson.fromJson(response, User.class);
-                CURRENT = users;
-                LINK = response;
+                    Log.e(TAG, "onResponse: " + users.toString());
 
-                small = pref.getBoolean("small", false);
-                adapter = new My_adapter(MainActivity.this, users, small);
-                recyclerView.setAdapter(adapter);
-                loading_anim.setVisibility(View.GONE);
+                    small = pref.getBoolean("small", false);
+                    adapter = new My_adapter(MainActivity.this, users, small);
+                    recyclerView.setAdapter(adapter);
+                    loading_anim.setVisibility(View.GONE);
 
-                if (atHome)
-                    pref.edit().putString("data", response).apply();
+                    if (atHome)
+                        pref.edit().putString("data", response).apply();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e(TAG, "onResponse: " + e.getMessage());
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(MainActivity.this, "Internet May Not be Available", Toast.LENGTH_LONG).show();
+
                 atHome = true;
+                Log.e(TAG, "onErrorResponse: " + error.getMessage());
+
                 final String response = pref.getString("saved", "none");
                 if (!"none".equals(response)) {
                     offline.setVisibility(View.VISIBLE);
@@ -407,6 +382,7 @@ public class MainActivity extends AppCompatActivity {
 
                 loading_anim.setVisibility(View.GONE);
                 network.setVisibility(View.VISIBLE);
+
                 Snackbar.make(network, "Internet May Not be Available", Snackbar.LENGTH_INDEFINITE)
                         .setAction("Retry", new View.OnClickListener() {
                             @Override
@@ -428,9 +404,25 @@ public class MainActivity extends AppCompatActivity {
                         loadOfflineData(response);
                     }
                 });
-
             }
-        });
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json; charset=UTF-8");
+                params.put("Access Token", "token");
+                params.put("User-Agent", "Mozilla/5.0");
+                return params;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         if (que == null)
             que = Volley.newRequestQueue(this);
@@ -463,6 +455,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new My_adapter(MainActivity.this, users, small);
         recyclerView.setAdapter(adapter);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -510,7 +503,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.offline:
-                if("none".equals(LINK))
+                if ("none".equals(LINK))
                     break;
                 Toast.makeText(this, "Saved Page For Offline Reading", Toast.LENGTH_SHORT).show();
                 getSharedPreferences(SHARED_PREF, MODE_PRIVATE).edit().putString("saved", LINK).apply();
@@ -533,8 +526,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //sign out user
-                        // and redirect to login screen
+                        //sign out user - and redirect to login screen
                         Toast.makeText(MainActivity.this, "Signing Out...", Toast.LENGTH_SHORT).show();
                         firebaseAuth.signOut();
                         getSharedPreferences(SHARED_PREF, MODE_PRIVATE).edit().clear().apply();
@@ -545,14 +537,12 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-//                        do nothing
-//                        this to cancel dialog
+//                        do nothing - this to cancel dialog
                     }
                 });
 
         AlertDialog dialog = builder.create();
         dialog.show();
-
     }
 
     @Override

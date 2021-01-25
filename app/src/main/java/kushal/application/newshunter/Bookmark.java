@@ -83,7 +83,7 @@ public class Bookmark extends AppCompatActivity {
                         final String link_url = String.valueOf(dataSnapshot.child(LINK).getValue());
                         final String image_url = String.valueOf(dataSnapshot.child(BM_IMAGE).getValue());
                         final String title = String.valueOf(dataSnapshot.child(TITLE).getValue());
-
+                        
                         holder.title.setText(title);
                         pd.dismiss();
                         Glide.with(getBaseContext()).load(image_url)

@@ -1,5 +1,6 @@
 package kushal.application.newshunter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.android.volley.AuthFailureError;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +29,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class PhoneLoginAct extends AppCompatActivity {
@@ -153,7 +157,7 @@ public class PhoneLoginAct extends AppCompatActivity {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber,
                 120,
                 TimeUnit.SECONDS,
-                TaskExecutors.MAIN_THREAD,
+                (Activity) TaskExecutors.MAIN_THREAD,
                 mCallbacks);
     }
 
