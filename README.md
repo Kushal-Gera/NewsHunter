@@ -1,6 +1,9 @@
-# NewsHunter
+# NewsHunter Android App
 ### Stay Updated, Stay Relevent
 ---  
+
+> Also available as webapp, NewsHunter Website at - https://github.com/Kushal-Gera/NewsHunterWebApp
+
 
 ## Libraries Used for the Project
 
